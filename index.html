@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beneath the Surface - Plumbing &amp; Hidden Leaks | The Snag Tag</title>
+<meta name="description" content="Plumbing and hidden leak checker for home buyers and owners, with the EPA water meter and toilet dye tests. Record evidence and know when to call a licensed plumber. Part of The Snag Tag Beneath the Surface collection.">
+<style>
+:root{
+  --paper:#F7FAFD; --sheet:#FFFFFF; --grid:rgba(45,91,154,.07); --grid2:rgba(45,91,154,.035);
+  --ink:#16243F; --ink2:#44546F; --muted:#6B7A93; --line:#C9D6E8; --line2:#E2EAF4;
+  --blue:#2D5B9A; --blue-soft:#E8F0FA; --cyan:#0F766E; --cyan-soft:#E6F4F2;
+  --high:#B3261E; --high-soft:#FCEBEA; --med:#A15C00; --med-soft:#FFF3E0; --low:#2E7D4F; --low-soft:#E7F5EC;
+  --focus:#0F766E; --shadow:0 1px 2px rgba(22,36,63,.06),0 4px 14px rgba(22,36,63,.05);
+  --mono:ui-monospace,"SFMono-Regular","Cascadia Mono","Roboto Mono",Consolas,monospace;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+[data-theme="dark"]{
+  --paper:#0F1A2C; --sheet:#15233A; --grid:rgba(140,180,230,.07); --grid2:rgba(140,180,230,.035);
+  --ink:#E6EEF9; --ink2:#B8C6DB; --muted:#8C9BB2; --line:#2F4466; --line2:#243855;
+  --blue:#8CB4E6; --blue-soft:#1C3150; --cyan:#5EEAD4; --cyan-soft:#12332F;
+  --high:#FF8A80; --high-soft:#3A1E22; --med:#FFB74D; --med-soft:#3A2C17; --low:#81C995; --low-soft:#1B3326;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--sans); color:var(--ink); background:var(--paper); font-size:15px; line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),
+  linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--blue)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+/* Title block */
+header.tb{background:var(--sheet);border-bottom:2px solid var(--ink);position:sticky;top:0;z-index:20}
+@media(max-width:700px){header.tb{position:static}.tb-cell{padding:8px 12px}}
+.tb-row{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.tb-cell{padding:10px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tb-cell:last-child{border-right:0}
+.tb-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.brand{flex:1 1 280px}
+.brand .coll{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.brand h1{margin:2px 0 0;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.brand h1 span{color:var(--blue);font-weight:600}
+.tb-ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--ink);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 10px;font-size:13px;cursor:pointer;font-family:var(--mono)}
+.seg button+button{border-left:1px solid var(--ink)}
+.seg button.on{background:var(--ink);color:var(--sheet)}
+nav.tabs{background:var(--sheet);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+nav.tabs button{border:0;background:none;padding:12px 14px;cursor:pointer;font-size:14px;color:var(--ink2);border-bottom:3px solid transparent;white-space:nowrap}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:6px}
+nav.tabs button.on{color:var(--ink);border-bottom-color:var(--cyan);font-weight:600}
+main{padding:22px 0 60px}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);margin-bottom:18px;position:relative}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line2);flex-wrap:wrap}
+.sheet-h h2{margin:0;font-size:17px}
+.sheet-h .ref{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+.sheet-b{padding:16px}
+.lede{color:var(--ink2);margin:0 0 12px;max-width:760px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:820px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2);min-width:0}
+label.f>span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=number],input[type=date],select,textarea{
+  width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:4px;background:var(--sheet);font-size:14px}
+textarea{min-height:70px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.hint{font-size:12px;color:var(--muted)}
+.conv{font-family:var(--mono);font-size:12px;color:var(--cyan);min-height:16px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--ink);background:var(--sheet);padding:8px 14px;border-radius:4px;cursor:pointer;font-size:14px}
+.btn:hover{background:var(--blue-soft)}
+.btn.pri{background:var(--ink);color:var(--sheet)}
+.btn.pri:hover{background:var(--blue);border-color:var(--blue)}
+.btn.sm{padding:5px 10px;font-size:13px}
+.btn.ghost{border-color:var(--line)}
+.btn.danger{border-color:var(--high);color:var(--high)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer;color:var(--ink2)}
+.chip.on{background:var(--cyan-soft);border-color:var(--cyan);color:var(--ink);font-weight:600}
+.chip.on::before{content:"\2713  ";color:var(--cyan)}
+/* Journey */
+.journey{display:flex;gap:0;overflow-x:auto;padding:4px 0}
+.jstep{flex:1 0 110px;text-align:center;position:relative;padding:8px 4px}
+.jstep .dot{width:34px;height:34px;margin:0 auto 6px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;background:var(--sheet);position:relative;z-index:1}
+.jstep::after{content:"";position:absolute;top:24px;left:50%;right:-50%;border-top:2px dashed var(--line)}
+.jstep:last-child::after{display:none}
+.jstep .t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.jstep .d{font-size:12px;color:var(--muted)}
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px;border-bottom:2px solid var(--ink);font-weight:500}
+.tbl td{padding:10px 8px;border-bottom:1px solid var(--line2);vertical-align:top}
+.tbl td .sub{font-size:12px;color:var(--muted)}
+.tbl-wrap{overflow-x:auto}
+@media(max-width:700px){
+  .tbl.stack thead{display:none}
+  .tbl.stack tr{display:block;border:1px solid var(--line);border-radius:6px;margin-bottom:10px;padding:6px}
+  .tbl.stack td{display:block;border:0;padding:6px}
+  .tbl.stack td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+}
+.risk{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;border:1px solid}
+.risk.High{color:var(--high);background:var(--high-soft);border-color:var(--high)}
+.risk.Medium{color:var(--med);background:var(--med-soft);border-color:var(--med)}
+.risk.Low{color:var(--low);background:var(--low-soft);border-color:var(--low)}
+.stat{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;flex-wrap:wrap}
+.stat button{border:0;background:var(--sheet);padding:5px 9px;font-size:12px;cursor:pointer;font-family:var(--mono);color:var(--ink2)}
+.stat button+button{border-left:1px solid var(--line)}
+.stat button.on[data-v="ok"],.stat button.on[data-v="none"]{background:var(--low-soft);color:var(--low);font-weight:700}
+.stat button.on[data-v="finding"],.stat button.on[data-v="signs"]{background:var(--high-soft);color:var(--high);font-weight:700}
+.stat button.on[data-v="open"],.stat button.on[data-v="unchecked"]{background:var(--blue-soft);color:var(--blue);font-weight:700}
+.stat button.on[data-v="na"],.stat button.on[data-v="noaccess"]{background:var(--med-soft);color:var(--med);font-weight:700}
+.note-in{margin-top:6px;font-size:13px;padding:6px 8px}
+/* Findings */
+.fcard{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:12px 14px;margin-bottom:10px;background:var(--sheet);display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.fcard.High{border-left-color:var(--high)}.fcard.Medium{border-left-color:var(--med)}.fcard.Low{border-left-color:var(--low)}
+.fid{font-family:var(--mono);font-weight:700;letter-spacing:.06em}
+.fcard .meta{font-size:13px;color:var(--ink2)}
+.empty{border:1px dashed var(--line);border-radius:6px;padding:26px;text-align:center;color:var(--muted)}
+/* Editor */
+.step{border-top:1px solid var(--line2);padding:16px 0}
+.step:first-child{border-top:0;padding-top:0}
+.step-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.step-h .num{width:28px;height:28px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;flex:0 0 auto}
+.step-h h3{margin:0;font-size:15px}
+.step-h .tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.q{font-size:14px;font-weight:600;margin:10px 0 6px}
+.editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
+@media(max-width:960px){.editor-layout{grid-template-columns:1fr}}
+.side{position:sticky;top:130px;align-self:start}
+@media(max-width:960px){.side{position:static}}
+.prompt-box{border:1px solid var(--cyan);border-radius:6px;background:var(--cyan-soft);padding:12px 14px}
+.prompt-box h4{margin:0 0 6px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.prompt-box ul{margin:4px 0 10px;padding-left:18px;font-size:13px}
+.prompt-box li{margin-bottom:4px}
+.warn{border:1px solid var(--high);background:var(--high-soft);border-radius:6px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+.warn b{color:var(--high)}
+.info{border:1px solid var(--blue);background:var(--blue-soft);border-radius:6px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+.ok{border:1px solid var(--low);background:var(--low-soft);border-radius:6px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+/* Photos */
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:560px){.photos{grid-template-columns:1fr}}
+.ph{border:1px dashed var(--ink2);border-radius:6px;padding:10px;text-align:center;background:var(--paper);min-height:160px;display:flex;flex-direction:column;gap:6px;justify-content:center;align-items:center}
+.ph .pt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.ph .pd{font-size:12px;color:var(--muted)}
+.ph img{max-width:100%;max-height:170px;border-radius:4px;border:1px solid var(--line)}
+.ph input{display:none}
+/* Dew */
+.dew-out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+@media(max-width:560px){.dew-out{grid-template-columns:1fr}}
+.kpi{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--paper)}
+.kpi .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-size:20px;font-weight:700;font-family:var(--mono)}
+.kpi .s{font-size:12px;color:var(--ink2)}
+.sum-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media(max-width:700px){.sum-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.legend{display:grid;gap:8px;font-size:13px}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+.refs{font-size:13px;padding-left:18px}
+.refs li{margin-bottom:6px}
+.src{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--muted);margin-top:4px}
+.src a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted var(--cyan)}
+.srclist{list-style:none;padding:0;margin:0;font-size:13px}
+.srclist li{padding:8px 0;border-bottom:1px solid var(--line2);overflow-wrap:anywhere}
+.refs li,.rep-f dd{overflow-wrap:anywhere}
+.srclist .key{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;display:block}
+.srclist li:target{background:var(--cyan-soft)}
+.steps li{margin-bottom:8px}
+@media(max-width:700px){#reportBody table.tbl{display:block;overflow-x:auto}}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--sheet);padding:10px 16px;border-radius:4px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;max-width:90vw}
+.toast.show{opacity:1}
+footer{border-top:2px solid var(--ink);background:var(--sheet);padding:14px 0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hide{display:none!important}
+.buyer-only,.owner-only{}
+body[data-mode="buyer"] .owner-only{display:none!important}
+body[data-mode="owner"] .buyer-only{display:none!important}
+/* Report */
+.rep-photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}
+.rep-photos figure{margin:0;font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.rep-photos img{width:100%;border:1px solid var(--line);border-radius:3px}
+.rep-f{border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:12px;page-break-inside:avoid}
+.rep-f dl{display:grid;grid-template-columns:170px 1fr;gap:4px 12px;margin:8px 0;font-size:13px}
+.rep-f dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.rep-f dd{margin:0}
+@media(max-width:560px){.rep-f dl{grid-template-columns:1fr}}
+@media print{
+  :root,[data-theme="dark"]{--paper:#fff;--sheet:#fff;--ink:#16243F;--ink2:#44546F;--muted:#5B6A82;--line:#B8C6DA;--line2:#DDE5F0;--blue:#2D5B9A;--blue-soft:#EEF3FA;--cyan:#0F766E;--cyan-soft:#E6F4F2;--high:#B3261E;--high-soft:#FCEBEA;--med:#A15C00;--med-soft:#FFF3E0;--low:#2E7D4F;--low-soft:#E7F5EC}
+  body{background:#fff;font-size:12px;color:#16243F}
+  .rep-f{page-break-inside:auto}
+  .rep-f dl,.rep-photos figure{page-break-inside:avoid}
+  .rep-photos img{max-height:220px;object-fit:contain}
+  header.tb,nav.tabs,footer,.no-print,.toast{display:none!important}
+  .view{display:none!important}
+  #view-report{display:block!important}
+  .sheet{box-shadow:none;border-color:#999}
+  main{padding:0}
+}
+</style>
+</head>
+<body data-mode="buyer">
+
+<header class="tb">
+  <div class="wrap tb-row" style="padding:0">
+    <div class="tb-cell brand">
+      <div class="coll">The Snag Tag &middot; Beneath the Surface</div>
+      <h1>Plumbing &amp; <span>Hidden Leaks</span></h1>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Mode</div>
+      <div class="seg" id="modeSeg" role="group" aria-label="Inspection mode">
+        <button data-v="buyer">Pre-Purchase</button><button data-v="owner">Maintenance</button>
+      </div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Meter unit</div>
+      <div class="seg" id="unitSeg" role="group" aria-label="Water meter unit">
+        <button data-v="m3">m&sup3;</button><button data-v="L">L</button><button data-v="gal">US gal</button>
+      </div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Display</div>
+      <div class="seg" id="themeSeg" role="group" aria-label="Theme">
+        <button data-v="light">Light</button><button data-v="dark">Dark</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap" id="tabs">
+    <button data-t="start"><span class="n">00</span>Start</button>
+    <button data-t="sweep"><span class="n">01</span>Fixture Sweep</button>
+    <button data-t="checks"><span class="n">02</span>Master Checks</button>
+    <button data-t="findings"><span class="n">03</span>Findings</button>
+    <button data-t="tests"><span class="n">04</span>Leak Tests</button>
+    <button data-t="report"><span class="n">05</span>Report</button>
+    <button data-t="guide"><span class="n">06</span>Guide &amp; Standards</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- START -->
+<section class="view" id="view-start">
+  <div class="sheet">
+    <div class="sheet-h"><h2>Find the leak you can't see.</h2><span class="ref">SHEET 00 &middot; START</span></div>
+    <div class="sheet-b">
+      <p class="lede">Many leaks are slow and hidden: inside a toilet, behind a boxed-in pipe, under a floor. This tool helps you look, run simple published leak tests, and record clear evidence for a licensed plumber. You never open, dismantle or repair anything.</p>
+      <div class="journey" aria-label="Inspection journey">
+        <div class="jstep"><div class="dot">1</div><div class="t">Notice</div><div class="d">Drip, stain, sound, smell or bill</div></div>
+        <div class="jstep"><div class="dot">2</div><div class="t">Locate</div><div class="d">Room and fixture</div></div>
+        <div class="jstep"><div class="dot">3</div><div class="t">Observe</div><div class="d">What, and when it happens</div></div>
+        <div class="jstep"><div class="dot">4</div><div class="t">Test</div><div class="d">Meter test, toilet dye test</div></div>
+        <div class="jstep"><div class="dot">5</div><div class="t">Photograph</div><div class="d">Context, close-up, below or behind</div></div>
+        <div class="jstep"><div class="dot">6</div><div class="t">Classify</div><div class="d">Possible factors, priority</div></div>
+        <div class="jstep"><div class="dot">7</div><div class="t">Escalate</div><div class="d">Licensed plumber</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet-h"><h2>Property details</h2><span class="ref">TITLE BLOCK</span></div>
+    <div class="sheet-b">
+      <div class="grid g3">
+        <label class="f"><span>Property name / reference</span><input type="text" data-p="name" placeholder="e.g. 12 Seaview Road"></label>
+        <label class="f"><span>Address</span><input type="text" data-p="address"></label>
+        <label class="f"><span>Inspection date</span><input type="date" data-p="date"></label>
+        <label class="f"><span>Inspected by</span><input type="text" data-p="inspector"></label>
+        <label class="f"><span>Property type</span>
+          <select data-p="type"><option value="">Select</option><option>House - detached</option><option>House - semi-detached / terraced</option><option>Apartment / flat</option><option>Townhouse</option><option>Bungalow / single storey</option><option>Other</option></select></label>
+        <label class="f"><span>Water supply</span>
+          <select data-p="supply"><option value="">Select</option><option>Public / mains</option><option>Private (well / borehole / tank)</option><option>Unknown</option></select></label>
+        <label class="f"><span>Main shut-off valve location</span><input type="text" data-p="shutoff" placeholder="e.g. under kitchen sink, or not found"></label>
+        <label class="f"><span>Water meter location</span><input type="text" data-p="meter" placeholder="e.g. front pavement box, or none"></label>
+        <label class="f buyer-only"><span>Property occupied?</span>
+          <select data-p="occupied"><option value="">Select</option><option>Occupied</option><option>Vacant</option><option>Unknown</option></select></label>
+      </div>
+      <label class="f" style="margin-top:12px"><span>General notes</span><textarea data-p="notes"></textarea></label>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet-h"><h2>Before you start - safety first</h2><span class="ref">HSE</span></div>
+    <div class="sheet-b">
+      <div class="warn"><b>Water near electrics:</b> do not touch sockets, switches or light fittings that are wet or stained. A qualified electrician must inspect wet electrical equipment before power is restored. <span class="src" style="display:inline">(<a href="#" data-src="CDC">CDC Electrical</a>)</span></div>
+      <div class="warn"><b>Sewage or contaminated water:</b> damage caused by sewage or other contaminated water needs a professional experienced with contaminated water. <span class="src" style="display:inline">(<a href="#" data-src="EPA4">EPA Mold Cleanup</a>)</span></div>
+      <ul style="margin:0;padding-left:18px;font-size:14px">
+        <li>Water heaters: look only. Do not touch the temperature and pressure relief valve, pipes or controls, and do not open any covers. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
+        <li>Pre-Purchase: ask before running taps, flushing toilets, opening cupboards or reading the meter. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
+        <li>Meter boxes can be in roads or pavements: watch for traffic, and do not lift heavy or damaged covers. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
+        <li>Do not open boxed-in pipes, remove panels or lift flooring. Record and ask. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
+      </ul>
+      <div class="row" style="margin-top:14px"><button class="btn pri" data-go="sweep">Start the Fixture Sweep &rarr;</button><button class="btn" id="newFindingStart">Log a leak now</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- SWEEP -->
+<section class="view hide" id="view-sweep">
+  <div class="sheet">
+    <div class="sheet-h"><h2>Fixture Sweep</h2><span class="ref">SHEET 01 &middot; <span id="sweepCount"></span></span></div>
+    <div class="sheet-b">
+      <p class="lede">Check every fixture, the places pipes run, and the ceilings and floors around wet rooms. For each area, also ask: <b>is anything boxed in, covered or hidden?</b></p>
+      <div class="tbl-wrap"><table class="tbl stack" id="sweepTbl">
+        <thead><tr><th style="width:34%">Area</th><th>Status</th><th style="width:120px">Hidden or covered?</th><th style="width:130px"></th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKS -->
+<section class="view hide" id="view-checks">
+  <div class="sheet">
+    <div class="sheet-h"><h2>Master Plumbing Checks</h2><span class="ref">SHEET 02 &middot; <span id="checkCount"></span></span></div>
+    <div class="sheet-b">
+      <p class="lede">Visual checks and simple published tests only. The <b>priority</b> shows how urgently a licensed plumber should look if the sign is found. It is not a diagnosis.</p>
+      <div class="row" style="margin-bottom:10px">
+        <span class="hint">Filter:</span>
+        <div class="seg" id="checkFilter"><button data-v="all" class="on">All</button><button data-v="High">High</button><button data-v="Medium">Medium</button><button data-v="open">Open</button><button data-v="finding">Findings</button></div>
+      </div>
+      <div class="tbl-wrap"><table class="tbl stack" id="checkTbl">
+        <thead><tr><th style="width:30%">Check</th><th style="width:26%">What to record</th><th>Priority</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINDINGS -->
+<section class="view hide" id="view-findings">
+  <div id="findList">
+    <div class="sheet">
+      <div class="sheet-h"><h2>Findings Register</h2><div class="row"><span class="ref" id="findCount"></span><button class="btn pri sm" id="addFinding">+ New finding</button></div></div>
+      <div class="sheet-b" id="findItems"></div>
+    </div>
+  </div>
+  <div id="findEdit" class="hide">
+    <div class="row no-print" style="margin-bottom:10px"><button class="btn ghost sm" id="backToList">&larr; All findings</button></div>
+    <div class="editor-layout">
+      <div class="sheet"><div class="sheet-h"><h2 id="edTitle">PLMB-001</h2><span class="ref">FINDING RECORD</span></div>
+        <div class="sheet-b" id="edBody"></div>
+      </div>
+      <aside class="side"><div class="prompt-box" id="promptBox"></div></aside>
+    </div>
+  </div>
+</section>
+
+<!-- TESTS -->
+<section class="view hide" id="view-tests">
+  <div class="sheet">
+    <div class="sheet-h"><h2>Water Meter Test</h2><span class="ref">SHEET 04 &middot; US EPA WATERSENSE</span></div>
+    <div class="sheet-b">
+      <p class="lede">US EPA: check your water meter before and after a two-hour period when no water is being used. If the meter changes at all, you probably have a leak. Make sure nobody uses water, and that appliances (washing machine, dishwasher, irrigation, ice maker) are not running.</p>
+      <p class="lede buyer-only"><b>Pre-Purchase:</b> ask the owner's permission first. If there is no meter or no access, record that instead.</p>
+      <div class="grid g4">
+        <label class="f"><span>Start reading (<b class="mu">m&sup3;</b>)</span><input type="number" step="0.001" min="0" id="mtStart"></label>
+        <label class="f"><span>End reading (<b class="mu">m&sup3;</b>)</span><input type="number" step="0.001" min="0" id="mtEnd"></label>
+        <label class="f"><span>Time with no water use (hours)</span><input type="number" step="0.25" min="0" id="mtHours" value="2"></label>
+        <label class="f"><span>Date</span><input type="date" id="mtDate"></label>
+      </div>
+      <div id="mtOut"></div>
+      <div class="row" style="margin-top:12px"><button class="btn pri" id="mtSave">Save to test log</button></div>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-h"><h2>Toilet Dye Test</h2><span class="ref">US EPA WATERSENSE</span></div>
+    <div class="sheet-b">
+      <p class="lede">US EPA: place a few drops of food colouring in the toilet tank. If any colour shows up in the bowl after 10 minutes, you have a leak. Do not flush during the test. Flush afterwards.</p>
+      <div class="grid g3">
+        <label class="f"><span>Toilet</span><input type="text" id="dyLoc" placeholder="e.g. Upstairs bathroom"></label>
+        <label class="f"><span>Result after 10 minutes</span><select id="dyRes"><option value="">Select</option><option>No colour in bowl</option><option>Colour in bowl - leak</option><option>Not tested (no access / no tank)</option></select></label>
+        <label class="f"><span>Date</span><input type="date" id="dyDate"></label>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn pri" id="dySave">Add to test log</button></div>
+      <div class="row" style="margin-top:14px"><button class="btn sm ghost" id="dyTimer">Start 10-minute timer</button><span class="conv" id="dyClock"></span></div>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-h"><h2>Test Log</h2><span class="ref" id="logCount"></span></div>
+    <div class="sheet-b">
+      <div class="tbl-wrap"><table class="tbl stack" id="logTbl"><thead><tr><th>Date</th><th>Test</th><th>Item</th><th>Result</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="info" style="margin-top:12px"><b>Reference figures (US EPA WaterSense):</b> a tap dripping once per second can waste more than 11,356 L (3,000 US gal) a year; a showerhead leaking 10 drips per minute more than 1,893 L (500 US gal) a year; the average household's leaks can waste more than 35,200 L (9,300 US gal) a year. A family of four using more than 45,400 L (12,000 US gal) a month in winter may have a serious leak. These are US figures for context, not targets.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REPORT -->
+<section class="view hide" id="view-report">
+  <div class="row no-print" style="margin-bottom:12px">
+    <button class="btn pri" id="printBtn">Print / Save as PDF</button>
+    <button class="btn" id="exportBtn">Download backup (.json)</button>
+    <label class="btn">Restore backup<input type="file" id="importFile" accept=".json,application/json" style="display:none"></label>
+    <button class="btn danger" id="resetBtn">Clear all data</button>
+  </div>
+  <div class="sheet"><div class="sheet-b" id="reportBody"></div></div>
+</section>
+
+<!-- GUIDE -->
+<section class="view hide" id="view-guide">
+  <div class="sheet">
+    <div class="sheet-h"><h2>What you can do now</h2><span class="ref">SAFE STEPS &middot; ALL CITED</span></div>
+    <div class="sheet-b">
+      <p class="lede">Safe steps from public guidance. None of them involve opening or repairing plumbing. In a property you do not own, share these with the owner.</p>
+      <ul class="steps" id="stepsList" style="padding-left:18px;font-size:14px"></ul>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-h"><h2>How priorities are defined</h2><span class="ref">SHEET 06 &middot; KEY</span></div>
+    <div class="sheet-b legend">
+      <div><span class="risk High">High</span><span>An active leak, a failed meter test, water damage to ceilings, walls or floors, a loose or leaking toilet, a leaking water heater, or water near electrics. Arrange a licensed plumber soon.</span></div>
+      <div><span class="risk Medium">Medium</span><span>A slow leak (drips, running toilet), slow drains, smells, missing or hard-to-reach shut-off valve, or conditions that need monitoring.</span></div>
+      <div><span class="risk Low">Low</span><span>Recorded for completeness, with no current defect seen.</span></div>
+      <p class="hint" style="margin:6px 0 0">Priority organises your findings. It is not a hazard rating or a diagnosis. Priority definitions: professional practice.</p>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-h"><h2>What this tool will not do</h2><span class="ref">LIMITS</span></div>
+    <div class="sheet-b">
+      <ul style="margin:0;padding-left:18px">
+        <li>It will not find the exact location of a hidden leak. A meter test shows that water is being lost, not where.</li>
+        <li>It never asks you to open, dismantle, adjust or repair plumbing, water heaters or valves.</li>
+        <li>It does not check water quality, water heater temperatures or gas appliances, and does not replace a licensed plumber.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-h"><h2>Standards &amp; Measurements</h2><span class="ref">REFERENCES</span></div>
+    <div class="sheet-b">
+      <h3 style="font-size:14px;margin:0 0 6px">Universal guidance used in this tool</h3>
+      <ul class="refs">
+        <li><b>Meter test:</b> check the meter before and after a two-hour period with no water use; any change probably means a leak. <span class="src" style="display:inline">(EPA WaterSense)</span></li>
+        <li><b>Toilet dye test:</b> a few drops of food colouring in the tank; colour in the bowl after 10 minutes means a leak. <span class="src" style="display:inline">(EPA WaterSense)</span></li>
+        <li><b>What a home inspector checks:</b> the main water shut-off valve (and describes its location), water heating equipment including TPR valves, fixtures and faucets by running water, toilets by flushing, drainage of sinks, tubs and showers, and the drain, waste and vent system. Reports active plumbing leaks, toilet damage, loose floor connections and leaks. <span class="src" style="display:inline">(InterNACHI SOP 3.6)</span></li>
+        <li><b>Fix leaks fast:</b> fix plumbing leaks and other water problems as soon as possible; dry wet materials within 24-48 hours. Cover cold water pipes with insulation to reduce condensation. <span class="src" style="display:inline">(EPA Brief Guide)</span></li>
+        <li><b>Moisture sources:</b> leaking or condensing water pipes. Hidden mould can grow in pipe chases. <span class="src" style="display:inline">(EPA Mold Course, EPA Remediation Guide)</span></li>
+        <li><b>Contaminated water:</b> sewage or contaminated water damage needs an experienced professional. <span class="src" style="display:inline">(EPA Mold Cleanup)</span></li>
+        <li><b>Wet electrics:</b> a qualified electrician must inspect before power is restored. <span class="src" style="display:inline">(CDC Electrical)</span></li>
+        <li><b>Units:</b> 1 m&sup3; = 1,000 L; 1 US gallon = 3.785 L. Figures are shown metric first, US gallons in brackets.</li>
+      </ul>
+      <div class="info" style="margin-top:10px"><b>Country-specific rules:</b> plumbing codes, water heater rules, who owns the pipe between the street and the house, backflow requirements and seller disclosure duties differ between countries. EPA figures are US figures for context. Verify local requirements with your water supplier, local authority or a licensed plumber.</div>
+      <p class="hint">Items marked <b>Professional practice</b> reflect general inspection and HSE practice. No single public standard covers them, so no standard is claimed.</p>
+      <h3 style="font-size:14px;margin:14px 0 6px">Source list</h3>
+      <ul class="srclist" id="srcList"></ul>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer><div class="wrap"><span>THE SNAG TAG &middot; BENEATH THE SURFACE COLLECTION &middot; SPECIALIST CHECK 04: PLUMBING &amp; HIDDEN LEAKS</span><span id="saveState">SAVED ON THIS DEVICE</span></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var KEY='snagtag_bts_plumbing_v1';
+
+var SRC={
+ WS:{n:'US EPA WaterSense - Fix a Leak Week',d:'updated 13 Mar 2026',u:'https://www.epa.gov/watersense/fix-leak-week'},
+ NACHI:{n:'InterNACHI - Home Inspection Standards of Practice (3.6 Plumbing)',d:'current published standard',u:'https://www.nachi.org/sop.htm'},
+ EPA1:{n:'US EPA - A Brief Guide to Mold, Moisture and Your Home',d:'updated 18 Feb 2026',u:'https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home'},
+ EPA2:{n:'US EPA - Mold Course Chapter 2: Why and Where Mold Grows',d:'updated 1 Dec 2025',u:'https://www.epa.gov/mold/mold-course-chapter-2'},
+ EPA3:{n:'US EPA - Mold Remediation in Schools and Commercial Buildings, Chapter 3',d:'updated 29 Apr 2026',u:'https://www.epa.gov/mold/mold-remediation-schools-and-commercial-buildings-guide-chapter-3'},
+ EPA4:{n:'US EPA - Mold Cleanup in Your Home',d:'updated 4 Jun 2026',u:'https://www.epa.gov/mold/mold-cleanup-your-home'},
+ CDC:{n:'US CDC - What to Do to Protect Yourself From Electrical Hazards',d:'updated 25 Jan 2024',u:'https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-from-electrical-hazards.html'},
+ PP:{n:'Professional practice',d:'general inspection and HSE practice, no single public standard',u:''}
+};
+function srcShort(k){return {WS:'EPA WaterSense',NACHI:'InterNACHI SOP',EPA1:'EPA Brief Guide',EPA2:'EPA Mold Course',EPA3:'EPA Remediation Guide',EPA4:'EPA Mold Cleanup',CDC:'CDC Electrical',PP:'Professional practice'}[k];}
+function srcTags(keys){return '<div class="src">Source: '+(keys||['PP']).map(function(k){return '<a href="#src-'+k+'" data-src="'+k+'" title="'+esc(SRC[k].n)+'">'+srcShort(k)+'</a>';}).join(' &middot; ')+'</div>';}
+
+var SWEEP=[
+ {id:'shut',g:'Supply',a:'Main water shut-off valve',h:'Found? Reachable? Labelled? Do not force a stiff valve.',s:['NACHI','PP']},
+ {id:'meter',g:'Supply',a:'Water meter',h:'Location, readable dial, dial moving with all water off',s:['WS']},
+ {id:'ksink',g:'Kitchen',a:'Under the kitchen sink',h:'Swollen or stained base board, drips at joints and traps, damp smell',s:['EPA1','EPA2']},
+ {id:'kapp',g:'Kitchen',a:'Dishwasher and fridge water connections',h:'Look only: stains or swelling on the floor or cabinet near connections',s:['PP']},
+ {id:'wc',g:'Bathrooms',a:'Toilets',h:'Rocking or loose at the floor, water at the base, running or refilling on its own',s:['NACHI','WS']},
+ {id:'taps',g:'Bathrooms',a:'Taps and basins',h:'Drips, water at the base of taps, under-basin pipes',s:['WS','NACHI']},
+ {id:'shower',g:'Bathrooms',a:'Showers and baths',h:'Dripping showerhead, cracked or missing seals and grout, slow drainage',s:['WS','NACHI','PP']},
+ {id:'wetfloor',g:'Bathrooms',a:'Floors around baths, showers and toilets',h:'Lifting or swollen flooring, soft spots, stains',s:['EPA2','PP']},
+ {id:'ceilbelow',g:'Below wet rooms',a:'Ceilings below bathrooms and kitchens',h:'Stains, rings, bubbling paint, sagging',s:['EPA2','PP']},
+ {id:'boxed',g:'Hidden routes',a:'Boxed-in pipes and ducts',h:'Stains or swelling on boxing, damp smell. Do not open boxing.',s:['EPA3','PP']},
+ {id:'walls',g:'Hidden routes',a:'Walls behind fixtures',h:'Staining, bubbling paint or swelling on walls behind baths, showers, toilets and sinks',s:['EPA2','PP']},
+ {id:'cold',g:'Hidden routes',a:'Cold water pipes you can see',h:'Condensation droplets or drips on cold pipes',s:['EPA1','EPA2']},
+ {id:'laun',g:'Laundry',a:'Washing machine hoses and drain',h:'Bulging, cracked or perished hoses (look only), water on the floor',s:['PP']},
+ {id:'wh',g:'Water heater',a:'Water heater area (look only)',h:'Water on the floor, rust or corrosion, drips from pipes or the relief valve discharge pipe',s:['NACHI','PP']},
+ {id:'drains',g:'Drainage',a:'Sinks, baths and showers draining',h:'Slow draining, gurgling, water backing up',s:['NACHI','PP']},
+ {id:'smell',g:'Drainage',a:'Drain smells',h:'Sewage or drain smells indoors or near outside drains',s:['PP','EPA4']},
+ {id:'outtap',g:'Outside',a:'Outdoor taps, hoses and irrigation',h:'Drips, damaged hoses, pinhole leaks, wet paving',s:['WS']},
+ {id:'yard',g:'Outside',a:'Ground and outside drains',h:'Unexplained wet or soft patches, overflowing gullies',s:['PP']}
+];
+
+var CHECKS=[
+ {id:'active',t:'Active leak seen',r:'Look for dripping, spraying or wet pipes, fixtures or joints.',m:'Fixture, location, drip or spray, photo',p:'High',s:['NACHI','EPA1']},
+ {id:'meter',t:'Water meter test',r:'Run the 2-hour meter test with no water use (Leak Tests sheet).',m:'Start and end reading, hours, result',p:'High',s:['WS']},
+ {id:'ceil',t:'Stains below wet rooms',r:'Ceilings and walls below or beside bathrooms and kitchens.',m:'Room, position, size, what is above',p:'High',s:['EPA2','PP']},
+ {id:'wcloose',t:'Toilet loose or leaking at the base',r:'Gently check if the toilet rocks; look for water or staining at the base.',m:'Which toilet, rocking yes / no, water yes / no',p:'High',s:['NACHI']},
+ {id:'wh',t:'Water heater leaking or corroded',r:'Look only: water below, rust, drips from connections or the relief valve discharge pipe.',m:'Location, what you see, photo',p:'High',s:['NACHI','PP']},
+ {id:'floor',t:'Swollen, soft or lifting floors',r:'Around baths, showers, toilets, sinks and appliances.',m:'Room, location, approx. area',p:'High',s:['EPA2','PP']},
+ {id:'dye',t:'Toilet dye test',r:'Food colouring in the tank; colour in the bowl after 10 minutes means a leak.',m:'Each toilet, result (use the Test Log)',p:'Medium',s:['WS']},
+ {id:'drip',t:'Dripping taps',r:'Check every tap for drips when fully closed.',m:'Which tap, drips per minute',p:'Medium',s:['WS']},
+ {id:'shead',t:'Dripping showerheads',r:'Check showerheads for drips after use.',m:'Which shower, drips per minute',p:'Medium',s:['WS']},
+ {id:'running',t:'Running or refilling toilets',r:'Listen for a toilet that runs or refills when nobody has flushed.',m:'Which toilet, how often',p:'Medium',s:['NACHI','WS']},
+ {id:'sink',t:'Under-sink leaks',r:'Open sink cupboards: base boards, joints, traps and smell.',m:'Which sink, what you see',p:'Medium',s:['EPA1','EPA2']},
+ {id:'seals',t:'Shower and bath seals',r:'Cracked, missing or mouldy seals and grout.',m:'Which fixture, where',p:'Medium',s:['PP']},
+ {id:'drain',t:'Slow drains',r:'Run each sink, bath and shower briefly and watch it drain.',m:'Which fixture, slow / normal',p:'Medium',s:['NACHI']},
+ {id:'smell',t:'Drain or sewage smells',r:'Notice drain smells indoors or near outside drains.',m:'Where, when',p:'Medium',s:['PP','EPA4']},
+ {id:'shut',t:'Main shut-off valve located',r:'Find the main water shut-off and note where it is and whether it is reachable.',m:'Location, reachable yes / no, labelled',p:'Medium',s:['NACHI','PP']},
+ {id:'boxed',t:'Boxed-in pipes and ducts',r:'Look for staining, swelling or smells on boxing.',m:'Location, what you see',p:'Medium',s:['EPA3','PP']},
+ {id:'cond',t:'Condensation on cold pipes',r:'Droplets on cold water pipes, especially in humid weather.',m:'Location, drips below yes / no',p:'Medium',s:['EPA1','EPA2']},
+ {id:'hoses',t:'Washing machine hoses',r:'Look only: bulging, cracks, perished rubber or water on the floor.',m:'Condition, water yes / no',p:'Medium',s:['PP']},
+ {id:'outdoor',t:'Outdoor taps and irrigation',r:'Drips, damaged hoses and connectors, wet paving.',m:'Location, what you see',p:'Medium',s:['WS']},
+ {id:'bill',t:'Water use history',r:'Compare water bills or use over time; a sudden rise can signal a hidden leak.',m:'Recent use vs previous periods',p:'Medium',s:['WS']},
+ {id:'flow',t:'Water flow and hot / cold',r:'Run two fixtures at once; note a big drop in flow, or hot and cold taps reversed.',m:'Fixtures, what you notice',p:'Low',s:['NACHI']}
+];
+
+var FIX=['Tap / faucet','Toilet','Shower / bath','Sink / basin','Visible pipe','Boxed-in pipe','Water heater','Washing machine / dishwasher','Drain / waste','Outdoor tap / irrigation','Meter / main valve','Ceiling or wall below','Floor','Unknown'];
+var SIGNS=['Drip','Active leak or spray','Water stain','Swollen or soft material','Bubbling paint','Mould','Rust or corrosion','White mineral crust','Condensation on pipe','Slow drain','Gurgling','Sewage smell','Toilet runs on its own','Dye test failed','Meter moved','Low flow','No defect seen'];
+var WHEN=['Always','When fixture is used','After shower or bath','When toilet is flushed','With no water in use','When hot water runs','Unknown'];
+var NEAR=['Electrics or light fitting','Ceiling below','Floor coverings','Cupboard contents','Outside wall','None of these'];
+var FACTORS=['Supply pipe or joint','Waste or drain','Fixture (tap, toilet, valve)','Seal or grout','Condensation','Appliance connection','Water heater','Unknown'];
+var QUESTIONS=[
+ 'Have there been any leaks, burst pipes or water damage? Where, and what was done?',
+ 'Where is the main water shut-off valve, and does it work?',
+ 'Have any toilets, taps or showers been repaired or replaced recently? Why?',
+ 'How old is the water heater, and has it been serviced? Can I see records?',
+ 'Have there been drain blockages or sewer problems?',
+ 'Any insurance claims for water damage?',
+ 'Why was this ceiling or wall area repainted? (ask for any area you noted)'
+];
+
+var STEPS={
+ fix:{t:'Fix plumbing leaks and other water problems as soon as possible, and dry wet materials within 24-48 hours so mould is less likely to grow.',s:['EPA1']},
+ meter:{t:'Run the meter test: read the meter, use no water for two hours, read it again. Any change probably means a leak.',s:['WS']},
+ dye:{t:'Run the toilet dye test: a few drops of food colouring in the tank; colour in the bowl after 10 minutes means a leak.',s:['WS']},
+ insulate:{t:'Cover cold water pipes with insulation to reduce condensation.',s:['EPA1']},
+ noPaint:{t:'Do not paint over water stains or mould until the source is fixed and the area is clean and dry.',s:['EPA1']},
+ sewage:{t:'Sewage or contaminated water: call a professional experienced with contaminated water damage.',s:['EPA4']},
+ wet:{t:'Water near electrics: do not touch. If it is safe to reach without standing in water, turn off power at the main breaker, and have a qualified electrician inspect before power is restored.',s:['CDC']},
+ shut:{t:'Know where the main water shut-off valve is, so you can turn off the water quickly in a leak.',s:['NACHI','PP']},
+ plumber:{t:'Ask a licensed plumber to find and repair the source. Visual checks and meter tests show that water is being lost, not exactly where.',s:['PP']}
+};
+function stepsFor(f){
+  var has=function(a,x){return a.indexOf(x)>-1;},k=[];
+  if(has(f.near,'Electrics or light fitting'))k.push('wet');
+  if(has(f.signs,'Sewage smell'))k.push('sewage');
+  if(f.signs.some(function(x){return ['Drip','Active leak or spray','Water stain','Swollen or soft material','Meter moved','Dye test failed','Toilet runs on its own'].indexOf(x)>-1;}))k.push('fix','shut');
+  if(has(f.signs,'Meter moved')||has(f.fix,'Boxed-in pipe')||has(f.fix,'Ceiling or wall below'))k.push('meter');
+  if(has(f.fix,'Toilet')||has(f.signs,'Toilet runs on its own'))k.push('dye');
+  if(has(f.signs,'Condensation on pipe')||has(f.factors,'Condensation'))k.push('insulate');
+  if(has(f.signs,'Water stain')||has(f.signs,'Mould')||has(f.signs,'Bubbling paint'))k.push('noPaint');
+  if(f.signs.length&&!(f.signs.length===1&&f.signs[0]==='No defect seen'))k.push('plumber');
+  return k.filter(function(x,i){return k.indexOf(x)===i;});
+}
+function stepHtml(key){var s=STEPS[key];return esc(s.t)+' <span class="src" style="display:inline">('+s.s.map(srcShort).join(', ')+')</span>';}
+
+/* ---------- State ---------- */
+function blank(){return {v:1,kind:'plumbing',settings:{mode:'buyer',theme:'light',unit:'m3'},property:{},sweep:{},checks:{},findings:[],log:[],questions:{},seq:0};}
+var S=blank();
+try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(o&&o.v===1){S=Object.assign(blank(),o);}}}catch(e){}
+var saveTimer=null;
+function flush(){
+  clearTimeout(saveTimer);saveTimer=null;
+  try{localStorage.setItem(KEY,JSON.stringify(S));$('#saveState').textContent='SAVED ON THIS DEVICE';}
+  catch(e){$('#saveState').textContent='NOT SAVED - STORAGE FULL';toast('Storage is full. Download a backup, then remove some photos.');}
+}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(flush,250);}
+window.addEventListener('pagehide',function(){if(saveTimer)flush();});
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&saveTimer)flush();});
+
+/* ---------- Helpers ---------- */
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show');},2600);}
+function num(v){if(v===''||v==null)return null;var n=parseFloat(v);return isFinite(n)?n:null;}
+function r1(n){return Math.round(n*10)/10;}
+function r2(n){return Math.round(n*100)/100;}
+function now(){return new Date().toISOString();}
+function fmtDate(iso){if(!iso)return '-';var d=new Date(iso);return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}
+var UNIT_L={m3:1000,L:1,gal:3.78541};
+var UNIT_LBL={m3:'m³',L:'L',gal:'US gal'};
+function litres(v){return v*UNIT_L[S.settings.unit];}
+function volBoth(L){return r1(L)+' L ('+r2(L/3.78541)+' US gal)';}
+
+/* ---------- Settings ---------- */
+function applySettings(){
+  document.documentElement.setAttribute('data-theme',S.settings.theme);
+  document.body.setAttribute('data-mode',S.settings.mode);
+  $$('#modeSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.v===S.settings.mode);});
+  $$('#themeSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.v===S.settings.theme);});
+  $$('#unitSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.v===S.settings.unit);});
+  $$('.mu').forEach(function(e){e.textContent=UNIT_LBL[S.settings.unit];});
+}
+function segBind(id,key,after){ $$('#'+id+' button').forEach(function(b){b.addEventListener('click',function(){S.settings[key]=b.dataset.v;applySettings();save();if(after)after();});}); }
+segBind('modeSeg','mode',function(){renderAll();});
+segBind('themeSeg','theme');
+segBind('unitSeg','unit',function(){renderMeter();});
+
+/* ---------- Tabs ---------- */
+var curTab='start';
+function go(t){
+  curTab=t;
+  $$('.view').forEach(function(v){v.classList.add('hide');});
+  $('#view-'+t).classList.remove('hide');
+  $$('#tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});
+  if(t==='report')renderReport();
+  if(t==='findings'&&!curId)showList();
+  window.scrollTo(0,0);
+}
+$$('#tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.t);});});
+$$('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+
+/* ---------- Property ---------- */
+function renderProperty(){ $$('[data-p]').forEach(function(el){el.value=S.property[el.dataset.p]||'';}); }
+$$('[data-p]').forEach(function(el){el.addEventListener('input',function(){S.property[el.dataset.p]=el.value;save();});el.addEventListener('change',function(){S.property[el.dataset.p]=el.value;save();});});
+
+/* ---------- Sweep ---------- */
+var SW_ST=[['unchecked','Not checked'],['none','No signs'],['signs','Signs found'],['noaccess','No access']];
+function renderSweep(){
+  var h='',lastG='',done=0;
+  SWEEP.forEach(function(s){
+    var st=S.sweep[s.id]||{status:'unchecked'}; if(st.status!=='unchecked')done++;
+    if(s.g!==lastG){h+='<tr><td colspan="4" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);padding-top:16px;border-bottom:1px solid var(--line)">'+esc(s.g)+'</td></tr>';lastG=s.g;}
+    h+='<tr data-id="'+s.id+'"><td data-l="Area"><b>'+esc(s.a)+'</b><div class="sub">'+esc(s.h)+'</div>'+srcTags(s.s)+'</td><td data-l="Status"><div class="stat">';
+    SW_ST.forEach(function(o){h+='<button type="button" data-v="'+o[0]+'" class="'+(st.status===o[0]?'on':'')+'">'+o[1]+'</button>';});
+    h+='</div><input type="text" class="note-in" placeholder="Note (optional)" value="'+esc(st.note||'')+'"></td>';
+    h+='<td data-l="Hidden or covered?"><select class="conc"><option value="">-</option><option'+(st.conc==='No'?' selected':'')+'>No</option><option'+(st.conc==='Possibly'?' selected':'')+'>Possibly</option><option'+(st.conc==='Yes'?' selected':'')+'>Yes</option></select></td>';
+    h+='<td>'+(st.status==='signs'?'<button type="button" class="btn sm mk">+ Log finding</button>':'')+'</td></tr>';
+  });
+  $('#sweepTbl tbody').innerHTML=h;
+  $('#sweepCount').textContent=done+' / '+SWEEP.length+' CHECKED';
+}
+$('#sweepTbl').addEventListener('click',function(e){
+  var tr=e.target.closest('tr[data-id]');if(!tr)return;var id=tr.dataset.id;var st=S.sweep[id]||(S.sweep[id]={status:'unchecked'});
+  var b=e.target.closest('.stat button');
+  if(b){st.status=b.dataset.v;save();renderSweep();return;}
+  if(e.target.closest('.mk')){var s=SWEEP.filter(function(x){return x.id===id;})[0];newFinding({room:s.a,source:'Fixture Sweep: '+s.a});}
+});
+$('#sweepTbl').addEventListener('input',function(e){var tr=e.target.closest('tr[data-id]');if(!tr)return;var st=S.sweep[tr.dataset.id]||(S.sweep[tr.dataset.id]={status:'unchecked'});
+  if(e.target.classList.contains('note-in'))st.note=e.target.value; save();});
+$('#sweepTbl').addEventListener('change',function(e){if(e.target.classList.contains('conc')){var tr=e.target.closest('tr[data-id]');var st=S.sweep[tr.dataset.id]||(S.sweep[tr.dataset.id]={status:'unchecked'});st.conc=e.target.value;save();}});
+
+/* ---------- Checks ---------- */
+var CK_ST=[['open','Open'],['ok','OK'],['finding','Finding'],['na','N/A']];
+var ckFilter='all';
+$$('#checkFilter button').forEach(function(b){b.addEventListener('click',function(){ckFilter=b.dataset.v;$$('#checkFilter button').forEach(function(x){x.classList.toggle('on',x===b);});renderChecks();});});
+function renderChecks(){
+  var h='',done=0;
+  CHECKS.forEach(function(c){
+    var st=S.checks[c.id]||{status:'open'}; if(st.status!=='open')done++;
+    if(ckFilter==='High'||ckFilter==='Medium'){if(c.p!==ckFilter)return;}
+    if(ckFilter==='open'&&st.status!=='open')return;
+    if(ckFilter==='finding'&&st.status!=='finding')return;
+    h+='<tr data-id="'+c.id+'"><td data-l="Check"><b>'+esc(c.t)+'</b><div class="sub">'+esc(c.r)+'</div>'+srcTags(c.s)+'</td><td data-l="What to record">'+esc(c.m)+'</td><td data-l="Priority"><span class="risk '+c.p+'">'+c.p+'</span></td><td data-l="Status"><div class="stat">';
+    CK_ST.forEach(function(o){h+='<button type="button" data-v="'+o[0]+'" class="'+(st.status===o[0]?'on':'')+'">'+o[1]+'</button>';});
+    h+='</div><input type="text" class="note-in" placeholder="Note (optional)" value="'+esc(st.note||'')+'">'+(st.status==='finding'?'<div style="margin-top:6px"><button type="button" class="btn sm mk">+ Log finding</button></div>':'')+'</td></tr>';
+  });
+  if(!h)h='<tr><td colspan="4"><div class="empty">No checks match this filter.</div></td></tr>';
+  $('#checkTbl tbody').innerHTML=h;
+  $('#checkCount').textContent=done+' / '+CHECKS.length+' COMPLETED';
+}
+$('#checkTbl').addEventListener('click',function(e){
+  var tr=e.target.closest('tr[data-id]');if(!tr)return;var id=tr.dataset.id;var st=S.checks[id]||(S.checks[id]={status:'open'});
+  var b=e.target.closest('.stat button');
+  if(b){st.status=b.dataset.v;save();renderChecks();return;}
+  if(e.target.closest('.mk')){var c=CHECKS.filter(function(x){return x.id===id;})[0];newFinding({source:'Master check: '+c.t,risk:c.p});}
+});
+$('#checkTbl').addEventListener('input',function(e){var tr=e.target.closest('tr[data-id]');if(!tr)return;var st=S.checks[tr.dataset.id]||(S.checks[tr.dataset.id]={status:'open'});st.note=e.target.value;save();});
+
+/* ---------- Findings ---------- */
+var curId=null;
+function findById(id){return S.findings.filter(function(f){return f.id===id;})[0];}
+function newFinding(pre){
+  S.seq=(S.seq||0)+1;
+  var id='PLMB-'+String(S.seq).padStart(3,'0');
+  var f={id:id,created:now(),room:'',fix:[],signs:[],when:[],near:[],drips:null,damp:'',desc:'',photos:{},factors:[],risk:'',riskAuto:true,escalate:'',status:'Open',recheck:'',notes:'',source:''};
+  if(pre)Object.keys(pre).forEach(function(k){f[k]=pre[k];});
+  if(pre&&pre.risk)f.riskAuto=false;
+  S.findings.push(f);save();
+  go('findings');openFinding(id);
+}
+function showList(){curId=null;$('#findEdit').classList.add('hide');$('#findList').classList.remove('hide');renderFindList();}
+function openFinding(id){curId=id;$('#findList').classList.add('hide');$('#findEdit').classList.remove('hide');renderEditor();window.scrollTo(0,0);}
+$('#addFinding').addEventListener('click',function(){newFinding();});
+$('#newFindingStart').addEventListener('click',function(){newFinding();});
+$('#backToList').addEventListener('click',showList);
+
+var HIGH_SIGNS=['Active leak or spray','Water stain','Swollen or soft material','Mould','Sewage smell','Meter moved'];
+function suggestRisk(f){
+  if(f.signs.some(function(x){return HIGH_SIGNS.indexOf(x)>-1;}))return 'High';
+  if(f.near.indexOf('Electrics or light fitting')>-1&&f.signs.length&&f.signs.indexOf('No defect seen')<0)return 'High';
+  if(f.fix.indexOf('Water heater')>-1&&f.signs.some(function(x){return ['Drip','Rust or corrosion'].indexOf(x)>-1;}))return 'High';
+  if(f.signs.length&&f.signs.every(function(x){return x==='No defect seen';}))return 'Low';
+  if(f.signs.length||f.fix.length)return 'Medium';
+  return '';
+}
+function chipGroup(key,list,f){
+  var h='<div class="chips" data-k="'+key+'">';
+  list.forEach(function(x){h+='<button type="button" class="chip'+(f[key].indexOf(x)>-1?' on':'')+'" data-x="'+esc(x)+'">'+esc(x)+'</button>';});
+  return h+'</div>';
+}
+function singleGroup(key,list,f){return '<div class="chips" data-single="'+key+'">'+list.map(function(x){return '<button type="button" class="chip'+(f[key]===x?' on':'')+'" data-x="'+esc(x)+'">'+esc(x)+'</button>';}).join('')+'</div>';}
+function stepH(n,tag,title){return '<div class="step-h"><div class="num">'+n+'</div><div><div class="tag">'+tag+'</div><h3>'+title+'</h3></div></div>';}
+function photoSlot(k,t,d,f){
+  var src=f.photos[k];
+  return '<div class="ph" data-ph="'+k+'"><div class="pt">'+t+'</div><div class="pd">'+d+'</div>'+(src?'<img alt="'+t+' photo" src="'+src+'"><div class="row"><label class="btn sm">Replace<input type="file" accept="image/*" capture="environment"></label><button type="button" class="btn sm danger rmph">Remove</button></div>':'<label class="btn sm">Add photo<input type="file" accept="image/*" capture="environment"></label>')+'</div>';
+}
+function renderEditor(){
+  var f=findById(curId);if(!f){showList();return;}
+  if(f.riskAuto){f.risk=suggestRisk(f);}
+  $('#edTitle').textContent=f.id;
+  var h='';
+  if(f.source)h+='<div class="info">Started from: '+esc(f.source)+'</div>';
+  h+='<div class="step">'+stepH(1,'Locate','Where and which fixture?')+
+    '<label class="f"><span>Room / location</span><input type="text" data-f="room" value="'+esc(f.room)+'" placeholder="e.g. Upstairs bathroom, toilet"></label>'+
+    '<div class="q">Fixture or part</div>'+chipGroup('fix',FIX,f)+'</div>';
+  h+='<div class="step">'+stepH(2,'Observe','What do you see, hear or smell?')+chipGroup('signs',SIGNS,f)+
+    '<div class="q">When does it happen?</div>'+chipGroup('when',WHEN,f)+
+    '<div class="q">What is next to it or below it?</div>'+chipGroup('near',NEAR,f)+
+    '<label class="f" style="margin-top:12px"><span>Describe what you see (facts only)</span><textarea data-f="desc" placeholder="e.g. Toilet rocks slightly; brown stain on dining room ceiling directly below, about 20 cm across">'+esc(f.desc)+'</textarea></label></div>';
+  h+='<div class="step">'+stepH(3,'Test','Record and link')+
+    '<div class="grid g2"><label class="f"><span>Drips per minute (if dripping)</span><input type="number" step="1" min="0" data-fn="drips" value="'+(f.drips==null?'':f.drips)+'"></label>'+
+    '<label class="f"><span>Linked Dampness finding (if any)</span><input type="text" data-f="damp" value="'+esc(f.damp)+'" placeholder="e.g. DAMP-002"></label></div>'+
+    '<p class="hint">For hidden leaks, run the meter test and toilet dye tests on the Leak Tests sheet and note the result here.</p></div>';
+  h+='<div class="step">'+stepH(4,'Photograph','Three-photo evidence set')+
+    '<div class="photos">'+photoSlot('context','1 - Context','Where it is in the room',f)+photoSlot('close','2 - Close-up','The leak or damage itself',f)+photoSlot('relation','3 - Relationship','What is below, behind or above it',f)+'</div>'+
+    '<p class="hint">Do not open boxing, panels or covers to take a photo.</p></div>';
+  h+='<div class="step">'+stepH(5,'Classify','Possible contributing factors')+
+    '<p class="hint" style="margin-top:0">Tick what the evidence could point to. Possibilities only. Water can travel along pipes and joists before it shows.</p>'+chipGroup('factors',FACTORS,f)+
+    '<div class="q">Priority</div><div class="row"><div class="seg" id="riskSeg">'+['High','Medium','Low'].map(function(x){return '<button type="button" data-v="'+x+'" class="'+(f.risk===x?'on':'')+'">'+x+'</button>';}).join('')+'</div>'+
+    '<span class="hint">'+(f.riskAuto?'Suggested from your answers. Tap to set your own.':'Set by you. <a href="#" id="riskAutoBtn">Use suggestion</a>')+'</span></div></div>';
+  h+='<div class="step">'+stepH(6,'Escalate','Licensed plumber')+
+    singleGroup('escalate',['Required','Not currently indicated','Undecided'],f)+
+    '<div class="grid g2" style="margin-top:12px"><label class="f"><span>Status</span><select data-f="status">'+['Open','Monitoring','Referred to plumber','Resolved'].map(function(x){return '<option'+(f.status===x?' selected':'')+'>'+x+'</option>';}).join('')+'</select></label>'+
+    '<label class="f owner-only"><span>Re-check date</span><input type="date" data-f="recheck" value="'+esc(f.recheck)+'"></label></div>'+
+    '<label class="f" style="margin-top:12px"><span>Notes</span><textarea data-f="notes">'+esc(f.notes)+'</textarea></label></div>';
+  h+='<div class="row" style="margin-top:6px"><button type="button" class="btn pri" id="doneFinding">Save and close</button><button type="button" class="btn danger" id="delFinding">Delete finding</button></div>';
+  $('#edBody').innerHTML=h;
+  renderPrompts(f);
+}
+function buildPrompts(f){
+  var has=function(a,x){return a.indexOf(x)>-1;};
+  var ind=[],next=[],warn=[],esc_=[];
+  f.fix.forEach(function(x){ind.push(x);});
+  f.signs.forEach(function(x){ind.push(x);});
+  f.when.forEach(function(x){if(x!=='Unknown')ind.push('Happens: '+x.toLowerCase());});
+  f.near.forEach(function(x){if(x!=='None of these')ind.push('Near: '+x.toLowerCase());});
+  if(f.drips!=null&&f.drips>0)ind.push(f.drips+' drips per minute');
+  if(has(f.near,'Electrics or light fitting'))warn.push('Water near electrics: do not touch. A qualified electrician must inspect (CDC).');
+  if(has(f.signs,'Sewage smell'))warn.push('Possible sewage or contaminated water: avoid contact and call an experienced professional (EPA).');
+  if(has(f.fix,'Water heater'))warn.push('Water heater: look only. Do not touch the relief valve, pipes or controls.');
+  if(has(f.signs,'Active leak or spray'))warn.push('Active leak: if safe, turn off the water at the main shut-off valve and call a licensed plumber.');
+  if(has(f.fix,'Ceiling or wall below')||has(f.signs,'Water stain')){next.push('Note exactly what is above or behind the stain: which fixture, which pipe route.','Does the stain change after that fixture is used? Run it briefly (with permission) and check again later.','Run the meter test to confirm whether water is being lost.');}
+  if(has(f.fix,'Toilet')){next.push('Run the toilet dye test.','Gently check whether the toilet rocks, and look for water at the base.');}
+  if(has(f.signs,'Toilet runs on its own'))next.push('Listen for the cistern refilling when nobody has flushed, and run the dye test.');
+  if(has(f.fix,'Boxed-in pipe'))next.push('Do not open boxing. Look for staining or swelling on the boxing and the ceiling or wall below it.');
+  if(has(f.signs,'Condensation on pipe')||has(f.factors,'Condensation'))next.push('Check whether drips only appear in humid weather or when cold water has been running. That may point to condensation rather than a leak.');
+  if(has(f.signs,'Slow drain')||has(f.signs,'Gurgling'))next.push('Check whether other fixtures on the same floor drain slowly too, and note any smells.');
+  if(has(f.signs,'White mineral crust'))next.push('Mineral crust can mark where water has seeped and dried. Photograph it and check the area when the fixture is in use.');
+  if(has(f.fix,'Washing machine / dishwasher'))next.push('Look for water marks on the floor after a wash cycle (look only; do not pull out appliances at a viewing).');
+  if(has(f.fix,'Outdoor tap / irrigation'))next.push('Check hoses and connectors for drips while the tap is on, and wet paving when it is off.');
+  if(has(f.signs,'Meter moved'))esc_.push('The meter moved with no water in use. A licensed plumber can trace the leak.');
+  if(has(f.signs,'Swollen or soft material')||has(f.signs,'Mould'))esc_.push('Water damage to materials: arrange a plumber, and use the Dampness tool to record the damage.');
+  esc_.push('A visual check cannot confirm exactly where water is escaping. A licensed plumber can.');
+  function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+  return {ind:uniq(ind),next:uniq(next),warn:uniq(warn),esc:uniq(esc_)};
+}
+function renderPrompts(f){
+  var p=buildPrompts(f),h='';
+  p.warn.forEach(function(w){h+='<div class="warn"><b>Safety:</b> '+esc(w)+'</div>';});
+  h+='<h4>Observation pattern</h4>';
+  h+=p.ind.length?'<ul>'+p.ind.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'<p class="hint">Tick what you notice and when it happens. Prompts build as you go.</p>';
+  if(p.next.length)h+='<h4>Check next</h4><ul>'+p.next.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  if(p.esc.length)h+='<h4>Escalation</h4><ul>'+p.esc.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  var st=stepsFor(f);
+  if(st.length)h+='<h4>'+(S.settings.mode==='buyer'?'Safe steps (for the owner)':'Safe steps now')+'</h4><ul class="steps">'+st.map(function(k){return '<li>'+stepHtml(k)+'</li>';}).join('')+'</ul>';
+  h+='<p class="hint" style="margin:0">These prompts organise evidence. They do not identify the cause. "Check next", escalation and immediate-safety prompts: professional practice. Safe steps: cited as shown.</p>';
+  $('#promptBox').innerHTML=h;
+}
+function refreshSide(f){
+  if(f.riskAuto){f.risk=suggestRisk(f);$$('#riskSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.v===f.risk);});}
+  renderPrompts(f);
+}
+$('#edBody').addEventListener('click',function(e){
+  var f=findById(curId);if(!f)return;
+  var chip=e.target.closest('.chip');
+  if(chip){
+    var grp=chip.parentNode,x=chip.dataset.x;
+    if(grp.dataset.k){var a=f[grp.dataset.k],i=a.indexOf(x);if(i>-1)a.splice(i,1);else a.push(x);chip.classList.toggle('on');}
+    else if(grp.dataset.single){var k=grp.dataset.single;f[k]=f[k]===x?'':x;$$('.chip',grp).forEach(function(c){c.classList.toggle('on',c.dataset.x===f[k]);});}
+    save();refreshSide(f);return;
+  }
+  var rb=e.target.closest('#riskSeg button');
+  if(rb){f.risk=rb.dataset.v;f.riskAuto=false;save();renderEditor();return;}
+  if(e.target.id==='riskAutoBtn'){e.preventDefault();f.riskAuto=true;save();renderEditor();return;}
+  if(e.target.closest('.rmph')){var k2=e.target.closest('[data-ph]').dataset.ph;delete f.photos[k2];save();renderEditor();return;}
+  if(e.target.id==='doneFinding'){save();toast(f.id+' saved');showList();return;}
+  if(e.target.id==='delFinding'){
+    if(e.target.dataset.confirm){S.findings=S.findings.filter(function(x){return x.id!==f.id;});save();toast(f.id+' deleted');showList();}
+    else{e.target.dataset.confirm='1';e.target.textContent='Tap again to delete';setTimeout(function(){if(e.target){delete e.target.dataset.confirm;e.target.textContent='Delete finding';}},3000);}
+  }
+});
+$('#edBody').addEventListener('input',function(e){
+  var f=findById(curId);if(!f)return;var t=e.target;
+  if(t.dataset.f){f[t.dataset.f]=t.value;save();}
+  else if(t.dataset.fn){f[t.dataset.fn]=num(t.value);save();refreshSide(f);}
+});
+$('#edBody').addEventListener('change',function(e){
+  var t=e.target;
+  if(t.type==='file'&&t.files&&t.files[0]){
+    var f=findById(curId),k=t.closest('[data-ph]').dataset.ph;
+    compress(t.files[0],function(url){if(!url){toast('Could not read that image.');return;}f.photos[k]=url;save();renderEditor();});
+  } else if(t.tagName==='SELECT'&&t.dataset.f){var f2=findById(curId);f2[t.dataset.f]=t.value;save();}
+});
+function compress(file,cb){
+  var rd=new FileReader();
+  rd.onload=function(){var img=new Image();img.onload=function(){
+    var max=900,w=img.width,h=img.height,sc=Math.min(1,max/Math.max(w,h));
+    var c=document.createElement('canvas');c.width=Math.round(w*sc);c.height=Math.round(h*sc);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    try{cb(c.toDataURL('image/jpeg',0.62));}catch(err){cb(null);}
+  };img.onerror=function(){cb(null);};img.src=rd.result;};
+  rd.onerror=function(){cb(null);};
+  rd.readAsDataURL(file);
+}
+function renderFindList(){
+  var h='';
+  $('#findCount').textContent=S.findings.length+' FINDING'+(S.findings.length===1?'':'S');
+  if(!S.findings.length){h='<div class="empty">No findings yet. Tap <b>+ New finding</b> when you notice something, or log one from the Fixture Sweep or Master Checks.</div>';}
+  S.findings.forEach(function(f){
+    var pc=Object.keys(f.photos).length;
+    h+='<div class="fcard '+(f.risk||'')+'"><div><div class="row"><span class="fid">'+f.id+'</span>'+(f.risk?'<span class="risk '+f.risk+'">'+f.risk+'</span>':'')+'<span class="hint">'+esc(f.status)+'</span></div>'+
+      '<div style="margin-top:4px"><b>'+esc(f.room||'Location not set')+'</b></div>'+
+      '<div class="meta">'+esc(f.fix.join(', ')||'Fixture not set')+' &middot; '+esc(f.signs.join(', ')||'No observations yet')+'</div>'+
+      '<div class="meta">Photos: '+pc+'/3 &middot; Escalation: '+esc(f.escalate||'not set')+(f.recheck&&S.settings.mode==='owner'?' &middot; Re-check: '+esc(f.recheck):'')+'</div></div>'+
+      '<div><button type="button" class="btn sm" data-open="'+f.id+'">Open</button></div></div>';
+  });
+  $('#findItems').innerHTML=h;
+}
+$('#findItems').addEventListener('click',function(e){var b=e.target.closest('[data-open]');if(b)openFinding(b.dataset.open);});
+
+/* ---------- Leak tests ---------- */
+function meterCalc(){
+  var a=num($('#mtStart').value),b=num($('#mtEnd').value),hr=num($('#mtHours').value);
+  if(a==null||b==null)return null;
+  var d=b-a;return {d:d,L:litres(d),hr:hr};
+}
+function renderMeter(){
+  var c=meterCalc(),h='';
+  if(c){
+    if(c.d<0)h='<div class="warn" style="margin-top:10px"><b>Check the readings:</b> the end reading is lower than the start reading.</div>';
+    else{
+      h='<div class="dew-out"><div class="kpi"><div class="k">Change</div><div class="v">'+r2(c.d)+' '+UNIT_LBL[S.settings.unit]+'</div><div class="s">'+volBoth(c.L)+'</div></div>'+
+        '<div class="kpi"><div class="k">Time with no use</div><div class="v">'+(c.hr==null?'-':c.hr+' h')+'</div><div class="s">EPA test period: 2 hours</div></div>'+
+        '<div class="kpi"><div class="k">Result</div><div class="v">'+(c.d>0?'Moved':'No change')+'</div><div class="s">'+(c.d>0?'Probable leak (EPA)':'No leak shown by this test')+'</div></div></div>';
+      if(c.d>0)h+='<div class="warn" style="margin-top:10px"><b>The meter changed</b> with no water in use. US EPA: you probably have a leak. A licensed plumber can trace it.</div>';
+      if(c.hr!=null&&c.hr<2)h+='<div class="info" style="margin-top:10px">EPA\'s test uses a two-hour period. A shorter test can miss a slow leak.</div>';
+    }
+  }
+  $('#mtOut').innerHTML=h;
+}
+['mtStart','mtEnd','mtHours'].forEach(function(id){$('#'+id).addEventListener('input',renderMeter);});
+$('#mtSave').addEventListener('click',function(){
+  var c=meterCalc();if(!c){toast('Enter start and end readings.');return;}
+  if(c.d<0){toast('The end reading is lower than the start reading.');return;}
+  var d=$('#mtDate').value;
+  S.log.push({at:d?new Date(d+'T12:00:00').toISOString():now(),test:'Meter test',item:(S.property.meter||'Water meter')+' ('+(c.hr==null?'?':c.hr)+' h)',result:(c.d>0?'Moved: ':'No change: ')+r2(c.d)+' '+UNIT_LBL[S.settings.unit]+' = '+volBoth(c.L),bad:c.d>0});
+  save();renderLog();toast('Saved to test log');
+});
+$('#dySave').addEventListener('click',function(){
+  var r=$('#dyRes').value;if(!r){toast('Select a result.');return;}
+  var d=$('#dyDate').value;
+  S.log.push({at:d?new Date(d+'T12:00:00').toISOString():now(),test:'Toilet dye test',item:$('#dyLoc').value||'Toilet',result:r,bad:/leak/i.test(r)});
+  save();renderLog();$('#dyLoc').value='';$('#dyRes').value='';toast('Added to test log');
+});
+var dyT=null;
+$('#dyTimer').addEventListener('click',function(){
+  if(dyT){clearInterval(dyT);dyT=null;$('#dyTimer').textContent='Start 10-minute timer';$('#dyClock').textContent='';return;}
+  var end=Date.now()+600000;$('#dyTimer').textContent='Stop timer';
+  function tick(){var s=Math.max(0,Math.round((end-Date.now())/1000));$('#dyClock').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+(s===0?' - check the bowl now':'');if(s===0){clearInterval(dyT);dyT=null;$('#dyTimer').textContent='Start 10-minute timer';}}
+  tick();dyT=setInterval(tick,1000);
+});
+function renderLog(){
+  var h='';
+  S.log.slice().reverse().forEach(function(r,idx){var real=S.log.length-1-idx;
+    h+='<tr><td data-l="Date">'+fmtDate(r.at)+'</td><td data-l="Test">'+esc(r.test)+'</td><td data-l="Item">'+esc(r.item)+'</td><td data-l="Result">'+(r.bad?'<span class="risk High">'+esc(r.result)+'</span>':esc(r.result))+'</td><td><button type="button" class="btn sm ghost" data-ldel="'+real+'">Remove</button></td></tr>';});
+  if(!h)h='<tr><td colspan="5"><div class="empty">No tests logged yet.</div></td></tr>';
+  $('#logTbl tbody').innerHTML=h;
+  $('#logCount').textContent=S.log.length+' TEST'+(S.log.length===1?'':'S');
+}
+$('#logTbl').addEventListener('click',function(e){var b=e.target.closest('[data-ldel]');if(!b)return;S.log.splice(+b.dataset.ldel,1);save();renderLog();});
+
+/* ---------- Report ---------- */
+function renderReport(){
+  var P=S.property,mode=S.settings.mode==='buyer'?'Pre-Purchase':'Maintenance';
+  var hi=0,md=0,lo=0,esc_=0;S.findings.forEach(function(f){if(f.risk==='High')hi++;else if(f.risk==='Medium')md++;else if(f.risk==='Low')lo++;if(f.escalate==='Required')esc_++;});
+  var h='<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:14px">'+
+    '<div><div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--cyan)">THE SNAG TAG &middot; BENEATH THE SURFACE</div><h2 style="margin:4px 0 0;font-size:22px">Plumbing &amp; Hidden Leaks Record</h2><div class="hint">'+mode+' inspection</div></div>'+
+    '<div style="font-family:var(--mono);font-size:12px;text-align:right">'+esc(P.name||'Property')+'<br>'+esc(P.address||'')+'<br>Date: '+esc(P.date||'-')+'<br>By: '+esc(P.inspector||'-')+'</div></div>';
+  h+='<div class="sum-grid"><div class="kpi"><div class="k">Findings</div><div class="v">'+S.findings.length+'</div></div><div class="kpi"><div class="k">High priority</div><div class="v" style="color:var(--high)">'+hi+'</div></div><div class="kpi"><div class="k">Medium / Low</div><div class="v">'+md+' / '+lo+'</div></div><div class="kpi"><div class="k">Plumber needed</div><div class="v">'+esc_+'</div></div></div>';
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Property</h3><p style="margin:0;font-size:14px">Type: '+esc(P.type||'-')+' &middot; Supply: '+esc(P.supply||'-')+' &middot; Main shut-off: '+esc(P.shutoff||'-')+' &middot; Meter: '+esc(P.meter||'-')+(S.settings.mode==='buyer'?' &middot; Occupied: '+esc(P.occupied||'-'):'')+'</p>'+(P.notes?'<p style="font-size:14px">'+esc(P.notes)+'</p>':'');
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Findings</h3>';
+  if(!S.findings.length)h+='<p class="hint">No findings recorded.</p>';
+  S.findings.forEach(function(f){
+    var p=buildPrompts(f),st=stepsFor(f);
+    h+='<div class="rep-f"><div class="row"><span class="fid">'+f.id+'</span>'+(f.risk?'<span class="risk '+f.risk+'">'+f.risk+'</span>':'')+'<b>'+esc(f.room||'')+'</b></div><dl>'+
+      '<dt>Fixture / part</dt><dd>'+esc(f.fix.join(', ')||'-')+'</dd>'+
+      '<dt>Observation</dt><dd>'+esc(f.signs.join(', ')||'-')+(f.desc?'<br>'+esc(f.desc):'')+'</dd>'+
+      '<dt>When</dt><dd>'+esc(f.when.join(', ')||'-')+'</dd>'+
+      '<dt>Nearby</dt><dd>'+esc(f.near.join(', ')||'-')+'</dd>'+
+      '<dt>Drips / linked</dt><dd>'+(f.drips==null?'-':f.drips+' per minute')+(f.damp?' &middot; Linked: '+esc(f.damp):'')+'</dd>'+
+      '<dt>Possible factors</dt><dd>'+esc(f.factors.join(', ')||'Not classified')+'</dd>'+
+      '<dt>Plumber</dt><dd>'+esc(f.escalate||'-')+' &middot; Status: '+esc(f.status)+(f.recheck?' &middot; Re-check: '+esc(f.recheck):'')+'</dd>'+
+      (p.next.length?'<dt>Check next</dt><dd>'+p.next.map(esc).join('<br>')+'</dd>':'')+
+      (st.length?'<dt>Safe steps</dt><dd>'+st.map(stepHtml).join('<br>')+'</dd>':'')+
+      (p.warn.length?'<dt>Safety</dt><dd>'+p.warn.map(esc).join('<br>')+'</dd>':'')+
+      (f.notes?'<dt>Notes</dt><dd>'+esc(f.notes)+'</dd>':'')+'</dl>';
+    var ph=[['context','Context'],['close','Close-up'],['relation','Relationship']].filter(function(x){return f.photos[x[0]];});
+    if(ph.length)h+='<div class="rep-photos">'+ph.map(function(x){return '<figure><img alt="'+x[1]+'" src="'+f.photos[x[0]]+'"><figcaption>'+x[1]+'</figcaption></figure>';}).join('')+'</div>';
+    h+='</div>';
+  });
+  if(S.log.length){h+='<h3 style="font-size:15px;margin:18px 0 6px">Leak tests</h3><table class="tbl"><thead><tr><th>Date</th><th>Test</th><th>Item</th><th>Result</th></tr></thead><tbody>'+S.log.map(function(r){return '<tr><td>'+fmtDate(r.at)+'</td><td>'+esc(r.test)+'</td><td>'+esc(r.item)+'</td><td>'+esc(r.result)+'</td></tr>';}).join('')+'</tbody></table>';}
+  var sw=SWEEP.filter(function(s){return S.sweep[s.id]&&S.sweep[s.id].status!=='unchecked';});
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Fixture Sweep</h3>';
+  h+=sw.length?'<table class="tbl"><thead><tr><th>Area</th><th>Result</th><th>Hidden?</th><th>Note</th></tr></thead><tbody>'+sw.map(function(s){var st=S.sweep[s.id];return '<tr><td>'+esc(s.a)+'</td><td>'+esc(SW_ST.filter(function(o){return o[0]===st.status;})[0][1])+'</td><td>'+esc(st.conc||'-')+'</td><td>'+esc(st.note||'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="hint">Not started.</p>';
+  var nc=SWEEP.length-sw.length; if(nc>0)h+='<p class="hint">'+nc+' area(s) not checked.</p>';
+  var ck=CHECKS.filter(function(c){return S.checks[c.id]&&S.checks[c.id].status!=='open';});
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Master Checks</h3>';
+  h+=ck.length?'<table class="tbl"><thead><tr><th>Check</th><th>Priority</th><th>Result</th><th>Note</th></tr></thead><tbody>'+ck.map(function(c){var st=S.checks[c.id];return '<tr><td>'+esc(c.t)+'</td><td><span class="risk '+c.p+'">'+c.p+'</span></td><td>'+esc(CK_ST.filter(function(o){return o[0]===st.status;})[0][1])+'</td><td>'+esc(st.note||'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="hint">Not started.</p>';
+  var oc=CHECKS.length-ck.length; if(oc>0)h+='<p class="hint">'+oc+' check(s) still open.</p>';
+  if(S.settings.mode==='buyer'){
+    h+='<h3 style="font-size:15px;margin:18px 0 6px">Questions for the seller or agent</h3><div class="no-print hint" style="margin-bottom:6px">Tick the questions you want on your printed record.</div><ul style="list-style:none;padding:0;margin:0">';
+    QUESTIONS.forEach(function(q,i){var on=S.questions[i]!==false;h+='<li style="margin-bottom:6px;'+(on?'':'opacity:.45')+'" class="'+(on?'':'no-print')+'"><label style="display:flex;gap:8px;align-items:flex-start;font-size:14px"><input type="checkbox" data-q="'+i+'"'+(on?' checked':'')+'> <span>'+esc(q)+'</span></label></li>';});
+    h+='</ul><p class="hint">Disclosure duties and plumbing rules differ between countries. Check with your conveyancer, agent or a licensed plumber.</p>';
+  }
+  h+='<div class="info" style="margin-top:18px"><b>Important:</b> this record documents visible signs and simple published leak tests. It does not locate hidden leaks precisely, does not assess water quality or water heaters, and does not replace a licensed plumber.</div>';
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Sources</h3><ul class="srclist">'+Object.keys(SRC).map(function(k){var s=SRC[k];return '<li><b>'+esc(s.n)+'</b> ('+esc(s.d)+')'+(s.u?'<br><span class="hint">'+esc(s.u)+'</span>':'')+'</li>';}).join('')+'</ul>';
+  $('#reportBody').innerHTML=h;
+}
+$('#reportBody').addEventListener('change',function(e){var q=e.target.dataset.q;if(q==null)return;S.questions[q]=e.target.checked;save();renderReport();});
+$('#printBtn').addEventListener('click',function(){renderReport();window.print();});
+$('#exportBtn').addEventListener('click',function(){
+  var blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});var a=document.createElement('a');
+  var nm=(S.property.name||'property').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase()||'property';
+  a.href=URL.createObjectURL(blob);a.download='plumbing-'+nm+'-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);toast('Backup downloaded');
+});
+$('#importFile').addEventListener('change',function(e){
+  var file=e.target.files[0];if(!file)return;var rd=new FileReader();
+  rd.onload=function(){try{var o=JSON.parse(rd.result);if(!o||o.v!==1||o.kind!=='plumbing'||!Array.isArray(o.findings))throw 0;S=Object.assign(blank(),o);save();applySettings();renderAll();go('report');toast('Backup restored');}catch(err){toast('That file is not a valid Plumbing backup.');}e.target.value='';};
+  rd.readAsText(file);
+});
+$('#resetBtn').addEventListener('click',function(e){
+  var b=e.currentTarget;
+  if(b.dataset.confirm){var keep=S.settings;S=blank();S.settings=keep;save();renderAll();toast('All data cleared');delete b.dataset.confirm;b.textContent='Clear all data';}
+  else{b.dataset.confirm='1';b.textContent='Tap again to clear everything';setTimeout(function(){delete b.dataset.confirm;b.textContent='Clear all data';},3500);}
+});
+
+/* ---------- Guide ---------- */
+function renderGuide(){
+  $('#stepsList').innerHTML=Object.keys(STEPS).map(function(k){return '<li>'+stepHtml(k)+'</li>';}).join('');
+  $('#srcList').innerHTML=Object.keys(SRC).map(function(k){var s=SRC[k];return '<li id="src-'+k+'"><span class="key">'+srcShort(k)+'</span><b>'+esc(s.n)+'</b> ('+esc(s.d)+')'+(s.u?'<br><a href="'+s.u+'" target="_blank" rel="noopener">'+esc(s.u)+'</a>':'')+'</li>';}).join('');
+}
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[data-src]');if(!a)return;e.preventDefault();e.stopPropagation();
+  go('guide');var el=document.getElementById('src-'+a.dataset.src);if(el){setTimeout(function(){el.scrollIntoView({block:'center'});el.style.background='var(--cyan-soft)';setTimeout(function(){el.style.background='';},1800);},30);}
+},true);
+
+/* ---------- Init ---------- */
+function renderAll(){renderProperty();renderSweep();renderChecks();renderLog();renderMeter();if(curId&&findById(curId))renderEditor();else showList();if(curTab==='report')renderReport();}
+if(!S.property.date){S.property.date=new Date().toISOString().slice(0,10);}
+if(!Array.isArray(S.log))S.log=[];
+var today=new Date().toISOString().slice(0,10);$('#mtDate').value=today;$('#dyDate').value=today;
+renderGuide();applySettings();renderAll();go('start');
+})();
+</script>
+</body>
+</html>
