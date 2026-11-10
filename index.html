@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Beneath the Surface - Plumbing &amp; Hidden Leaks | The Snag Tag</title>
-<meta name="description" content="Plumbing and hidden leak checker for home buyers and owners, with the EPA water meter and toilet dye tests. Record evidence and know when to call a licensed plumber. Part of The Snag Tag Beneath the Surface collection.">
+<title>The Silent Leak - Plumbing &amp; Hidden Leak Investigation | Beneath the Surface | The Snag Tag</title>
+<meta name="description" content="Find the leak you cannot see with the 2-hour water meter test and 10-minute toilet dye test built in. Photo evidence and a printable record.">
 <style>
 :root{
   --paper:#F7FAFD; --sheet:#FFFFFF; --grid:rgba(45,91,154,.07); --grid2:rgba(45,91,154,.035);
@@ -205,6 +205,21 @@ body[data-mode="owner"] .buyer-only{display:none!important}
   main{padding:0}
 }
 </style>
+<style id="bts-identity">
+/* Beneath the Surface - Water group identity */
+:root:not([data-theme="dark"]){
+  --paper:#F3F8F8; --ink:#0F2E33; --ink2:#3B5A5E; --muted:#5E7A7D;
+  --line:#C3DADB; --line2:#DEEBEB; --grid:rgba(14,94,102,.07); --grid2:rgba(14,94,102,.035);
+  --blue:#0E5E66; --blue-soft:#E3F1F1; --cyan:#3E8E8E; --cyan-soft:#E6F3F2; --focus:#0E5E66;
+}
+body{font-family:"Segoe UI","Helvetica Neue",system-ui,-apple-system,Arial,sans-serif}
+.brand h1,.sheet-h h2{font-family:Georgia,"Times New Roman",serif;letter-spacing:0}
+.brand .plain{font-size:12.5px;color:var(--ink2);margin-top:2px}
+.sheet-h{position:relative}
+.sheet-h::after{content:"";position:absolute;left:16px;right:16px;bottom:-4px;height:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6'%3E%3Cpath d='M0 3 Q6 0 12 3 T24 3' fill='none' stroke='%237FB8B8' stroke-width='1'/%3E%3C/svg%3E") repeat-x center/24px 6px;opacity:.75;pointer-events:none}
+.trail-name{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:0 0 6px}
+@media print{.sheet-h::after{display:none}}
+</style>
 </head>
 <body data-mode="buyer">
 
@@ -212,7 +227,7 @@ body[data-mode="owner"] .buyer-only{display:none!important}
   <div class="wrap tb-row" style="padding:0">
     <div class="tb-cell brand">
       <div class="coll">The Snag Tag &middot; Beneath the Surface</div>
-      <h1>Plumbing &amp; <span>Hidden Leaks</span></h1>
+      <h1>The Silent <span>Leak</span></h1><div class="plain">Plumbing &amp; Hidden Leak Investigation</div>
     </div>
     <div class="tb-cell">
       <div class="tb-label">Mode</div>
@@ -238,11 +253,11 @@ body[data-mode="owner"] .buyer-only{display:none!important}
 <nav class="tabs">
   <div class="wrap" id="tabs">
     <button data-t="start"><span class="n">00</span>Start</button>
-    <button data-t="sweep"><span class="n">01</span>Fixture Sweep</button>
-    <button data-t="checks"><span class="n">02</span>Master Checks</button>
-    <button data-t="findings"><span class="n">03</span>Findings</button>
+    <button data-t="sweep"><span class="n">01</span>Hiding Places</button>
+    <button data-t="checks"><span class="n">02</span>Trail Points</button>
+    <button data-t="findings"><span class="n">03</span>Evidence File</button>
     <button data-t="tests"><span class="n">04</span>Leak Tests</button>
-    <button data-t="report"><span class="n">05</span>Report</button>
+    <button data-t="report"><span class="n">05</span>Your Record</button>
     <button data-t="guide"><span class="n">06</span>Guide &amp; Standards</button>
   </div>
 </nav>
@@ -300,7 +315,7 @@ body[data-mode="owner"] .buyer-only{display:none!important}
         <li>Meter boxes can be in roads or pavements: watch for traffic, and do not lift heavy or damaged covers. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
         <li>Do not open boxed-in pipes, remove panels or lift flooring. Record and ask. <span class="src" style="display:inline">(<a href="#" data-src="PP">Professional practice</a>)</span></li>
       </ul>
-      <div class="row" style="margin-top:14px"><button class="btn pri" data-go="sweep">Start the Fixture Sweep &rarr;</button><button class="btn" id="newFindingStart">Log a leak now</button></div>
+      <div class="row" style="margin-top:14px"><button class="btn pri" data-go="sweep">Start with the Hiding Places &rarr;</button><button class="btn" id="newFindingStart">Log a leak now</button></div>
     </div>
   </div>
 </section>
@@ -308,7 +323,7 @@ body[data-mode="owner"] .buyer-only{display:none!important}
 <!-- SWEEP -->
 <section class="view hide" id="view-sweep">
   <div class="sheet">
-    <div class="sheet-h"><h2>Fixture Sweep</h2><span class="ref">SHEET 01 &middot; <span id="sweepCount"></span></span></div>
+    <div class="sheet-h"><h2>Hiding Places</h2><span class="ref">SHEET 01 &middot; <span id="sweepCount"></span></span></div>
     <div class="sheet-b">
       <p class="lede">Check every fixture, the places pipes run, and the ceilings and floors around wet rooms. For each area, also ask: <b>is anything boxed in, covered or hidden?</b></p>
       <div class="tbl-wrap"><table class="tbl stack" id="sweepTbl">
@@ -322,15 +337,15 @@ body[data-mode="owner"] .buyer-only{display:none!important}
 <!-- CHECKS -->
 <section class="view hide" id="view-checks">
   <div class="sheet">
-    <div class="sheet-h"><h2>Master Plumbing Checks</h2><span class="ref">SHEET 02 &middot; <span id="checkCount"></span></span></div>
+    <div class="sheet-h"><h2>Trail Points</h2><span class="ref">SHEET 02 &middot; <span id="checkCount"></span></span></div>
     <div class="sheet-b">
       <p class="lede">Visual checks and simple published tests only. The <b>priority</b> shows how urgently a licensed plumber should look if the sign is found. It is not a diagnosis.</p>
       <div class="row" style="margin-bottom:10px">
         <span class="hint">Filter:</span>
-        <div class="seg" id="checkFilter"><button data-v="all" class="on">All</button><button data-v="High">High</button><button data-v="Medium">Medium</button><button data-v="open">Open</button><button data-v="finding">Findings</button></div>
+        <div class="seg" id="checkFilter"><button data-v="all" class="on">All</button><button data-v="High">High</button><button data-v="Medium">Medium</button><button data-v="open">Open</button><button data-v="finding">Evidence File</button></div>
       </div>
       <div class="tbl-wrap"><table class="tbl stack" id="checkTbl">
-        <thead><tr><th style="width:30%">Check</th><th style="width:26%">What to record</th><th>Priority</th><th>Status</th></tr></thead>
+        <thead><tr><th style="width:30%">Trail point</th><th style="width:26%">What to record</th><th>Priority</th><th>Status</th></tr></thead>
         <tbody></tbody>
       </table></div>
     </div>
@@ -341,14 +356,14 @@ body[data-mode="owner"] .buyer-only{display:none!important}
 <section class="view hide" id="view-findings">
   <div id="findList">
     <div class="sheet">
-      <div class="sheet-h"><h2>Findings Register</h2><div class="row"><span class="ref" id="findCount"></span><button class="btn pri sm" id="addFinding">+ New finding</button></div></div>
+      <div class="sheet-h"><h2>Evidence File</h2><div class="row"><span class="ref" id="findCount"></span><button class="btn pri sm" id="addFinding">+ New snag</button></div></div>
       <div class="sheet-b" id="findItems"></div>
     </div>
   </div>
   <div id="findEdit" class="hide">
-    <div class="row no-print" style="margin-bottom:10px"><button class="btn ghost sm" id="backToList">&larr; All findings</button></div>
+    <div class="row no-print" style="margin-bottom:10px"><button class="btn ghost sm" id="backToList">&larr; All snags</button></div>
     <div class="editor-layout">
-      <div class="sheet"><div class="sheet-h"><h2 id="edTitle">PLMB-001</h2><span class="ref">FINDING RECORD</span></div>
+      <div class="sheet"><div class="sheet-h"><h2 id="edTitle">PLMB-001</h2><span class="ref">SNAG RECORD</span></div>
         <div class="sheet-b" id="edBody"></div>
       </div>
       <aside class="side"><div class="prompt-box" id="promptBox"></div></aside>
@@ -460,7 +475,7 @@ body[data-mode="owner"] .buyer-only{display:none!important}
 </div>
 </main>
 
-<footer><div class="wrap"><span>THE SNAG TAG &middot; BENEATH THE SURFACE COLLECTION &middot; SPECIALIST CHECK 04: PLUMBING &amp; HIDDEN LEAKS</span><span id="saveState">SAVED ON THIS DEVICE</span></div></footer>
+<footer><div class="wrap"><span>THE SNAG TAG &middot; BENEATH THE SURFACE COLLECTION &middot; 04 &middot; THE SILENT LEAK</span><span id="saveState">SAVED ON THIS DEVICE</span></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -628,7 +643,7 @@ $$('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.d
 function renderProperty(){ $$('[data-p]').forEach(function(el){el.value=S.property[el.dataset.p]||'';}); }
 $$('[data-p]').forEach(function(el){el.addEventListener('input',function(){S.property[el.dataset.p]=el.value;save();});el.addEventListener('change',function(){S.property[el.dataset.p]=el.value;save();});});
 
-/* ---------- Sweep ---------- */
+/* ---------- Hiding Places ---------- */
 var SW_ST=[['unchecked','Not checked'],['none','No signs'],['signs','Signs found'],['noaccess','No access']];
 function renderSweep(){
   var h='',lastG='',done=0;
@@ -648,14 +663,14 @@ $('#sweepTbl').addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]');if(!tr)return;var id=tr.dataset.id;var st=S.sweep[id]||(S.sweep[id]={status:'unchecked'});
   var b=e.target.closest('.stat button');
   if(b){st.status=b.dataset.v;save();renderSweep();return;}
-  if(e.target.closest('.mk')){var s=SWEEP.filter(function(x){return x.id===id;})[0];newFinding({room:s.a,source:'Fixture Sweep: '+s.a});}
+  if(e.target.closest('.mk')){var s=SWEEP.filter(function(x){return x.id===id;})[0];newFinding({room:s.a,source:'Hiding Places: '+s.a});}
 });
 $('#sweepTbl').addEventListener('input',function(e){var tr=e.target.closest('tr[data-id]');if(!tr)return;var st=S.sweep[tr.dataset.id]||(S.sweep[tr.dataset.id]={status:'unchecked'});
   if(e.target.classList.contains('note-in'))st.note=e.target.value; save();});
 $('#sweepTbl').addEventListener('change',function(e){if(e.target.classList.contains('conc')){var tr=e.target.closest('tr[data-id]');var st=S.sweep[tr.dataset.id]||(S.sweep[tr.dataset.id]={status:'unchecked'});st.conc=e.target.value;save();}});
 
 /* ---------- Checks ---------- */
-var CK_ST=[['open','Open'],['ok','OK'],['finding','Finding'],['na','N/A']];
+var CK_ST=[['open','Open'],['ok','OK'],['finding','Snag'],['na','N/A']];
 var ckFilter='all';
 $$('#checkFilter button').forEach(function(b){b.addEventListener('click',function(){ckFilter=b.dataset.v;$$('#checkFilter button').forEach(function(x){x.classList.toggle('on',x===b);});renderChecks();});});
 function renderChecks(){
@@ -665,7 +680,7 @@ function renderChecks(){
     if(ckFilter==='High'||ckFilter==='Medium'){if(c.p!==ckFilter)return;}
     if(ckFilter==='open'&&st.status!=='open')return;
     if(ckFilter==='finding'&&st.status!=='finding')return;
-    h+='<tr data-id="'+c.id+'"><td data-l="Check"><b>'+esc(c.t)+'</b><div class="sub">'+esc(c.r)+'</div>'+srcTags(c.s)+'</td><td data-l="What to record">'+esc(c.m)+'</td><td data-l="Priority"><span class="risk '+c.p+'">'+c.p+'</span></td><td data-l="Status"><div class="stat">';
+    h+='<tr data-id="'+c.id+'"><td data-l="Trail point"><b>'+esc(c.t)+'</b><div class="sub">'+esc(c.r)+'</div>'+srcTags(c.s)+'</td><td data-l="What to record">'+esc(c.m)+'</td><td data-l="Priority"><span class="risk '+c.p+'">'+c.p+'</span></td><td data-l="Status"><div class="stat">';
     CK_ST.forEach(function(o){h+='<button type="button" data-v="'+o[0]+'" class="'+(st.status===o[0]?'on':'')+'">'+o[1]+'</button>';});
     h+='</div><input type="text" class="note-in" placeholder="Note (optional)" value="'+esc(st.note||'')+'">'+(st.status==='finding'?'<div style="margin-top:6px"><button type="button" class="btn sm mk">+ Log finding</button></div>':'')+'</td></tr>';
   });
@@ -774,7 +789,7 @@ function buildPrompts(f){
   if(has(f.fix,'Washing machine / dishwasher'))next.push('Look for water marks on the floor after a wash cycle (look only; do not pull out appliances at a viewing).');
   if(has(f.fix,'Outdoor tap / irrigation'))next.push('Check hoses and connectors for drips while the tap is on, and wet paving when it is off.');
   if(has(f.signs,'Meter moved'))esc_.push('The meter moved with no water in use. A licensed plumber can trace the leak.');
-  if(has(f.signs,'Swollen or soft material')||has(f.signs,'Mould'))esc_.push('Water damage to materials: arrange a plumber, and use the Dampness tool to record the damage.');
+  if(has(f.signs,'Swollen or soft material')||has(f.signs,'Mould'))esc_.push('Water damage to materials: arrange a plumber, and use Behind the Wardrobe to record the damage.');
   esc_.push('A visual check cannot confirm exactly where water is escaping. A licensed plumber can.');
   function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
   return {ind:uniq(ind),next:uniq(next),warn:uniq(warn),esc:uniq(esc_)};
@@ -784,11 +799,11 @@ function renderPrompts(f){
   p.warn.forEach(function(w){h+='<div class="warn"><b>Safety:</b> '+esc(w)+'</div>';});
   h+='<h4>Observation pattern</h4>';
   h+=p.ind.length?'<ul>'+p.ind.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'<p class="hint">Tick what you notice and when it happens. Prompts build as you go.</p>';
-  if(p.next.length)h+='<h4>Check next</h4><ul>'+p.next.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  if(p.next.length)h+='<h4>Next on the trail</h4><ul>'+p.next.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
   if(p.esc.length)h+='<h4>Escalation</h4><ul>'+p.esc.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
   var st=stepsFor(f);
   if(st.length)h+='<h4>'+(S.settings.mode==='buyer'?'Safe steps (for the owner)':'Safe steps now')+'</h4><ul class="steps">'+st.map(function(k){return '<li>'+stepHtml(k)+'</li>';}).join('')+'</ul>';
-  h+='<p class="hint" style="margin:0">These prompts organise evidence. They do not identify the cause. "Check next", escalation and immediate-safety prompts: professional practice. Safe steps: cited as shown.</p>';
+  h+='<p class="hint" style="margin:0">These prompts organise evidence. They do not identify the cause. "Next on the trail", escalation and immediate-safety prompts: professional practice. Safe steps: cited as shown.</p>';
   $('#promptBox').innerHTML=h;
 }
 function refreshSide(f){
@@ -839,8 +854,8 @@ function compress(file,cb){
 }
 function renderFindList(){
   var h='';
-  $('#findCount').textContent=S.findings.length+' FINDING'+(S.findings.length===1?'':'S');
-  if(!S.findings.length){h='<div class="empty">No findings yet. Tap <b>+ New finding</b> when you notice something, or log one from the Fixture Sweep or Master Checks.</div>';}
+  $('#findCount').textContent=S.findings.length+' SNAG'+(S.findings.length===1?'':'S');
+  if(!S.findings.length){h='<div class="empty">No findings yet. Tap <b>+ New snag</b> when you notice something, or log one from the Hiding Places or Trail Points.</div>';}
   S.findings.forEach(function(f){
     var pc=Object.keys(f.photos).length;
     h+='<div class="fcard '+(f.risk||'')+'"><div><div class="row"><span class="fid">'+f.id+'</span>'+(f.risk?'<span class="risk '+f.risk+'">'+f.risk+'</span>':'')+'<span class="hint">'+esc(f.status)+'</span></div>'+
@@ -909,11 +924,11 @@ function renderReport(){
   var P=S.property,mode=S.settings.mode==='buyer'?'Pre-Purchase':'Maintenance';
   var hi=0,md=0,lo=0,esc_=0;S.findings.forEach(function(f){if(f.risk==='High')hi++;else if(f.risk==='Medium')md++;else if(f.risk==='Low')lo++;if(f.escalate==='Required')esc_++;});
   var h='<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:14px">'+
-    '<div><div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--cyan)">THE SNAG TAG &middot; BENEATH THE SURFACE</div><h2 style="margin:4px 0 0;font-size:22px">Plumbing &amp; Hidden Leaks Record</h2><div class="hint">'+mode+' inspection</div></div>'+
+    '<div><div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--cyan)">THE SNAG TAG &middot; BENEATH THE SURFACE</div><h2 style="margin:4px 0 0;font-size:22px">The Silent Leak &middot; Your Record</h2><div class="hint">'+mode+' inspection</div></div>'+
     '<div style="font-family:var(--mono);font-size:12px;text-align:right">'+esc(P.name||'Property')+'<br>'+esc(P.address||'')+'<br>Date: '+esc(P.date||'-')+'<br>By: '+esc(P.inspector||'-')+'</div></div>';
-  h+='<div class="sum-grid"><div class="kpi"><div class="k">Findings</div><div class="v">'+S.findings.length+'</div></div><div class="kpi"><div class="k">High priority</div><div class="v" style="color:var(--high)">'+hi+'</div></div><div class="kpi"><div class="k">Medium / Low</div><div class="v">'+md+' / '+lo+'</div></div><div class="kpi"><div class="k">Plumber needed</div><div class="v">'+esc_+'</div></div></div>';
+  h+='<div class="sum-grid"><div class="kpi"><div class="k">Evidence File</div><div class="v">'+S.findings.length+'</div></div><div class="kpi"><div class="k">High priority</div><div class="v" style="color:var(--high)">'+hi+'</div></div><div class="kpi"><div class="k">Medium / Low</div><div class="v">'+md+' / '+lo+'</div></div><div class="kpi"><div class="k">Plumber needed</div><div class="v">'+esc_+'</div></div></div>';
   h+='<h3 style="font-size:15px;margin:18px 0 6px">Property</h3><p style="margin:0;font-size:14px">Type: '+esc(P.type||'-')+' &middot; Supply: '+esc(P.supply||'-')+' &middot; Main shut-off: '+esc(P.shutoff||'-')+' &middot; Meter: '+esc(P.meter||'-')+(S.settings.mode==='buyer'?' &middot; Occupied: '+esc(P.occupied||'-'):'')+'</p>'+(P.notes?'<p style="font-size:14px">'+esc(P.notes)+'</p>':'');
-  h+='<h3 style="font-size:15px;margin:18px 0 6px">Findings</h3>';
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Evidence File</h3>';
   if(!S.findings.length)h+='<p class="hint">No findings recorded.</p>';
   S.findings.forEach(function(f){
     var p=buildPrompts(f),st=stepsFor(f);
@@ -925,7 +940,7 @@ function renderReport(){
       '<dt>Drips / linked</dt><dd>'+(f.drips==null?'-':f.drips+' per minute')+(f.damp?' &middot; Linked: '+esc(f.damp):'')+'</dd>'+
       '<dt>Possible factors</dt><dd>'+esc(f.factors.join(', ')||'Not classified')+'</dd>'+
       '<dt>Plumber</dt><dd>'+esc(f.escalate||'-')+' &middot; Status: '+esc(f.status)+(f.recheck?' &middot; Re-check: '+esc(f.recheck):'')+'</dd>'+
-      (p.next.length?'<dt>Check next</dt><dd>'+p.next.map(esc).join('<br>')+'</dd>':'')+
+      (p.next.length?'<dt>Next on the trail</dt><dd>'+p.next.map(esc).join('<br>')+'</dd>':'')+
       (st.length?'<dt>Safe steps</dt><dd>'+st.map(stepHtml).join('<br>')+'</dd>':'')+
       (p.warn.length?'<dt>Safety</dt><dd>'+p.warn.map(esc).join('<br>')+'</dd>':'')+
       (f.notes?'<dt>Notes</dt><dd>'+esc(f.notes)+'</dd>':'')+'</dl>';
@@ -935,12 +950,12 @@ function renderReport(){
   });
   if(S.log.length){h+='<h3 style="font-size:15px;margin:18px 0 6px">Leak tests</h3><table class="tbl"><thead><tr><th>Date</th><th>Test</th><th>Item</th><th>Result</th></tr></thead><tbody>'+S.log.map(function(r){return '<tr><td>'+fmtDate(r.at)+'</td><td>'+esc(r.test)+'</td><td>'+esc(r.item)+'</td><td>'+esc(r.result)+'</td></tr>';}).join('')+'</tbody></table>';}
   var sw=SWEEP.filter(function(s){return S.sweep[s.id]&&S.sweep[s.id].status!=='unchecked';});
-  h+='<h3 style="font-size:15px;margin:18px 0 6px">Fixture Sweep</h3>';
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Hiding Places</h3>';
   h+=sw.length?'<table class="tbl"><thead><tr><th>Area</th><th>Result</th><th>Hidden?</th><th>Note</th></tr></thead><tbody>'+sw.map(function(s){var st=S.sweep[s.id];return '<tr><td>'+esc(s.a)+'</td><td>'+esc(SW_ST.filter(function(o){return o[0]===st.status;})[0][1])+'</td><td>'+esc(st.conc||'-')+'</td><td>'+esc(st.note||'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="hint">Not started.</p>';
   var nc=SWEEP.length-sw.length; if(nc>0)h+='<p class="hint">'+nc+' area(s) not checked.</p>';
   var ck=CHECKS.filter(function(c){return S.checks[c.id]&&S.checks[c.id].status!=='open';});
-  h+='<h3 style="font-size:15px;margin:18px 0 6px">Master Checks</h3>';
-  h+=ck.length?'<table class="tbl"><thead><tr><th>Check</th><th>Priority</th><th>Result</th><th>Note</th></tr></thead><tbody>'+ck.map(function(c){var st=S.checks[c.id];return '<tr><td>'+esc(c.t)+'</td><td><span class="risk '+c.p+'">'+c.p+'</span></td><td>'+esc(CK_ST.filter(function(o){return o[0]===st.status;})[0][1])+'</td><td>'+esc(st.note||'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="hint">Not started.</p>';
+  h+='<h3 style="font-size:15px;margin:18px 0 6px">Trail Points</h3>';
+  h+=ck.length?'<table class="tbl"><thead><tr><th>Trail point</th><th>Priority</th><th>Result</th><th>Note</th></tr></thead><tbody>'+ck.map(function(c){var st=S.checks[c.id];return '<tr><td>'+esc(c.t)+'</td><td><span class="risk '+c.p+'">'+c.p+'</span></td><td>'+esc(CK_ST.filter(function(o){return o[0]===st.status;})[0][1])+'</td><td>'+esc(st.note||'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="hint">Not started.</p>';
   var oc=CHECKS.length-ck.length; if(oc>0)h+='<p class="hint">'+oc+' check(s) still open.</p>';
   if(S.settings.mode==='buyer'){
     h+='<h3 style="font-size:15px;margin:18px 0 6px">Questions for the seller or agent</h3><div class="no-print hint" style="margin-bottom:6px">Tick the questions you want on your printed record.</div><ul style="list-style:none;padding:0;margin:0">';
@@ -988,7 +1003,7 @@ var today=new Date().toISOString().slice(0,10);$('#mtDate').value=today;$('#dyDa
 renderGuide();applySettings();renderAll();go('start');
 })();
 </script>
-<script>window.TST_SAFE={id:'u2v2yx98',accent:'#2D5B9A',backup:function(){document.getElementById('exportBtn').click()},restore:function(){document.getElementById('importFile').click()}};</script>
+<script>window.TST_SAFE={id:'u2v2yx98',accent:'#0E5E66',backup:function(){document.getElementById('exportBtn').click()},restore:function(){document.getElementById('importFile').click()}};</script>
 <!-- ===== The Snag Tag - Your emergency numbers ===== -->
 <style>
 .tst-nums{margin:8px 0 2px}
